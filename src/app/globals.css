@@ -40,7 +40,7 @@
 }
 
 /* 다크 모드 */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
@@ -71,7 +71,7 @@
     --card-rgb: 100, 100, 100;
     --card-border-rgb: 200, 200, 200;
   }
-}
+} */
 
 /* 기본 스타일 리셋 */
 /* 모든 요소에 대해 패딩과 마진을 초기화하고, 박스 모델을 border-box로 설정합니다 */
@@ -91,8 +91,6 @@ body {
 body {
   font-size: 1.6rem; /* 기본 폰트 크기를 16px로 설정; 16px = 1.6rem */
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
-    rgb(var(--background-start-rgb));
   /* 여기에 배경색, 텍스트 색상 등 body에 대한 기본 스타일을 설정하세요 */
 }
 
