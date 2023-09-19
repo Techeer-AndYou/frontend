@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
-export default function Home() {
+export default function StartPage() {
+  // 여기는 시작 페이지 입니다.
   return (
     <main>
       여기는 메인 페이지 입니다 <br />
