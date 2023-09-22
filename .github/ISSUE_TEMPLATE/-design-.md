@@ -1,10 +1,9 @@
 ---
-name: "[Design]"
+name: '[Design]'
 about: 퍼블리싱, CSS 작업, 디자인 개선 작업 등
-title: "[Design]"
-labels: 디자인
+title: '[Design]'
+labels: Design
 assignees: ''
-
 ---
 
 **기능에 대한 설명**
@@ -13,9 +12,9 @@ assignees: ''
 
 **TODO List**
 
-- [ ]  [ ]
-- [ ]  [ ]
-- [ ]  [ ]
+- [ ] [ ]
+- [ ] [ ]
+- [ ] [ ]
 
 **참고 자료**
 기능과 관련된 추가 정보나 스크린샷 등이 있다면 첨부해 주세요.

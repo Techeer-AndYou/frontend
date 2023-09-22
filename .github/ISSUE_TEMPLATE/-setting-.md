@@ -1,13 +1,13 @@
 ---
-name: '[Feature]'
-about: 구현 할 기능이 있다면 적어주세요
-title: '[Feature]'
-labels: Feature
+name: '[Setting]'
+about: 세팅할 내용에 관해 적어주세요
+title: '[Setting]'
+labels: Chore
 assignees: ''
 ---
 
 **기능에 대한 설명**
-새로운 기능에 대한 명확하고 간결한 설명을 작성해 주세요.
+세팅할 내용에 대한 명확하고 간결한 설명을 작성해 주세요.
 (예: 로그인 이중 인증 구현)
 
 **TODO List**
