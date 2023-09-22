@@ -1,6 +1,9 @@
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
+import { createThreeScene } from './threeSetup'
+import { createTitleElement, createButtonElement } from './createUIElements'
+import { handleWindowResize } from './eventHandlers'
 
 interface NightSkyProps {
   router: ReturnType<typeof useRouter>
@@ -11,60 +14,17 @@ const NightSky: React.FC<NightSkyProps> = () => {
   const buttonElementRef = useRef<HTMLButtonElement | null>(null)
 
   useEffect(() => {
-    // Scene 생성
-    const scene = new THREE.Scene()
     //size
     const sizes = {
       width: window.innerWidth,
       height: window.innerHeight,
     }
-    //camera
-    const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-    camera.position.z = 2
-    scene.add(camera)
-    //renderer
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-    })
-    renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    renderer.setClearColor(new THREE.Color('#21282a'), 1)
-    document.body.appendChild(renderer.domElement)
 
-    // Create title element
-    const titleElement = document.createElement('h1')
-    titleElement.textContent = 'Remember '
-    const plusSpan = document.createElement('span')
-    plusSpan.textContent = 'Plus+'
-    plusSpan.style.color = 'skyblue'
-    titleElement.appendChild(plusSpan)
-    titleElement.style.position = 'absolute'
-    titleElement.style.top = '5%'
-    titleElement.style.left = '49%'
-    titleElement.style.transform = 'translateX(-50%)'
-    titleElement.style.fontWeight = '800'
-    titleElement.style.fontFamily = '"Times New Roman", Times, serif'
-    titleElement.style.fontSize = '30px'
-    titleElement.style.color = '#fff'
-    titleElement.style.opacity = '0'
-    document.body.appendChild(titleElement)
+    const { scene, camera, renderer } = createThreeScene(sizes)
+    const [titleElement, plusSpan] = createTitleElement()
+    const buttonElement = createButtonElement()
 
-    // Create button element
-    buttonElementRef.current = document.createElement('button')
-    buttonElementRef.current.textContent = 'start'
-    buttonElementRef.current.style.position = 'absolute'
-    buttonElementRef.current.style.top = '50%'
-    buttonElementRef.current.style.left = '50%'
-    buttonElementRef.current.style.transform = 'translate(-50%, -50%)'
-    buttonElementRef.current.style.padding = '70px 50px'
-    buttonElementRef.current.style.fontSize = '15px'
-    buttonElementRef.current.style.fontWeight = '900'
-    buttonElementRef.current.style.color = '#fff'
-    buttonElementRef.current.style.backgroundColor = 'rgba(33, 40, 42, 0.001)'
-    buttonElementRef.current.style.border = 'none'
-    buttonElementRef.current.style.borderRadius = '7px'
-    buttonElementRef.current.style.cursor = 'pointer'
-    document.body.appendChild(buttonElementRef.current)
+    buttonElementRef.current = buttonElement
 
     // Button event listener
     buttonElementRef.current.addEventListener('click', () => {
@@ -72,17 +32,7 @@ const NightSky: React.FC<NightSkyProps> = () => {
     })
 
     window.addEventListener('resize', () => {
-      // Update sizes
-      sizes.width = window.innerWidth
-      sizes.height = window.innerHeight
-
-      // Update camera
-      camera.aspect = sizes.width / sizes.height
-      camera.updateProjectionMatrix()
-
-      // Update renderer
-      renderer.setSize(sizes.width, sizes.height)
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+      handleWindowResize(camera, renderer, sizes)
     })
 
     // Objects
@@ -192,13 +142,11 @@ const NightSky: React.FC<NightSkyProps> = () => {
     }, 3000)
 
     return () => {
-      // Clean up event listeners or anything else if needed
+      // Clean up
       document.body.removeChild(renderer.domElement)
-      document.removeEventListener('mousemove', handleMouseMove)
       document.body.removeChild(titleElement)
-      if (buttonElementRef.current) {
-        document.body.removeChild(buttonElementRef.current)
-      }
+      document.body.removeChild(buttonElementRef.current!)
+      document.removeEventListener('mousemove', handleMouseMove)
     }
   }, [router])
 
