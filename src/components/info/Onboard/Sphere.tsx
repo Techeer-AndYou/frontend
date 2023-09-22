@@ -135,13 +135,36 @@ const Sphere = () => {
   }
 
   return (
-    <div onClick={handleScreenClick}>
+    <div
+      onClick={handleScreenClick}
+      style={{
+        height: '100vh',
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <div
         ref={containerRef}
-        style={{ marginTop: '-237px', marginBottom: '-100px' }}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
         onClick={handleModelClick}
       />
-      {showText && <Text isVisible={true} onClick={handleScreenClick} />}
+      {showText && (
+        <Text
+          style={{
+            transform: 'translate(-50%, 0)',
+            // 수정요망
+          }}
+          isVisible={true}
+          onClick={handleScreenClick}
+        />
+      )}
     </div>
   )
 }
@@ -149,6 +172,7 @@ const Sphere = () => {
 interface TextProps {
   isVisible: boolean
   onClick: () => void
+  style?: React.CSSProperties
 }
 
 const Text = ({ isVisible, onClick }: TextProps) => {
@@ -178,3 +202,7 @@ const Text = ({ isVisible, onClick }: TextProps) => {
 }
 
 export default Sphere
+// 수정 요망
+// 1. Sphere.tsx의 Text 컴포넌트의 style을 수정해야 한다.
+// 2. Sphere 컴포넌트의 style을 수정해야 한다.
+// 3. 모듈화 시키기
