@@ -3,6 +3,8 @@ import styled from '@emotion/styled'
 import { useRef, useEffect } from 'react'
 import Sphere from './Sphere'
 import Information from './Information'
+import Profile from './Profile'
+import Charts from './Charts'
 
 const fadeInAnimation = keyframes`
   0% {
@@ -64,8 +66,6 @@ const AnimateOnScroll3 = styled.div`
   }
 `
 
-const Slider = styled.div``
-
 const AnimateOnScroll4 = styled.div`
   display: flex;
   justify-content: center;
@@ -75,8 +75,6 @@ const AnimateOnScroll4 = styled.div`
     animation: ${fadeInAnimation} 0.8s ease-in-out;
   }
 `
-
-const Chart = styled.div``
 
 const AnimateOnScroll5 = styled.div`
   display: flex;
@@ -152,10 +150,10 @@ const OnboardPage = () => {
         <Information />
       </AnimateOnScroll2>
       <AnimateOnScroll3>
-        <Slider />
+        <Profile />
       </AnimateOnScroll3>
       <AnimateOnScroll4>
-        <Chart />
+        <Charts />
       </AnimateOnScroll4>
       <AnimateOnScroll5>
         <TextComponent />
