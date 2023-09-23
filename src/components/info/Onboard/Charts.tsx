@@ -4,8 +4,6 @@ import IntroLineChart from './IntroLineChart'
 
 const Container = styled.div`
   background-color: white;
-  padding-top: 20px;
-  padding-bottom: 12px;
 
   @media (min-width: 1024px) {
     padding-top: 120px;
@@ -22,18 +20,6 @@ const InnerContainer = styled.div`
   border: 1px solid #f4f7ff;
   background-color: #f4f7ff;
   padding: 8px 6px;
-
-  @media (min-width: 640px) {
-    padding: 8px 10px;
-  }
-
-  @media (min-width: 768px) {
-    padding: 8px;
-  }
-
-  @media (min-width: 1024px) {
-    padding: 10px;
-  }
 `
 
 const TextContainer = styled.div`

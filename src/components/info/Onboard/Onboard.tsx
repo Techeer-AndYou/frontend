@@ -5,6 +5,7 @@ import Sphere from './Sphere'
 import Information from './Information'
 import Profile from './Profile'
 import Charts from './Charts'
+import Text from './Text'
 
 const fadeInAnimation = keyframes`
   0% {
@@ -87,8 +88,6 @@ const AnimateOnScroll5 = styled.div`
   }
 `
 
-const TextComponent = styled.div``
-
 const OnboardPage = () => {
   const profileRef = useRef<HTMLDivElement | null>(null)
   const cardRef = useRef<HTMLDivElement | null>(null)
@@ -156,7 +155,7 @@ const OnboardPage = () => {
         <Charts />
       </AnimateOnScroll4>
       <AnimateOnScroll5>
-        <TextComponent />
+        <Text />
       </AnimateOnScroll5>
     </MainContainer>
   )
