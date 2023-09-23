@@ -1,0 +1,11 @@
+Model Information:
+* title:	Sphere-Glass-4K-MaterialTest
+* source:	https://sketchfab.com/3d-models/sphere-glass-4k-materialtest-489b2307e0e4459b8bdccdc8c5fbc919
+* author:	chiwei (https://sketchfab.com/chiwei2333)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Sphere-Glass-4K-MaterialTest" (https://sketchfab.com/3d-models/sphere-glass-4k-materialtest-489b2307e0e4459b8bdccdc8c5fbc919) by chiwei (https://sketchfab.com/chiwei2333) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

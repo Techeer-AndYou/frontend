@@ -29,7 +29,7 @@ const NightSky: React.FC<NightSkyProps> = () => {
 
     // Button event listener
     buttonElementRef.current.addEventListener('click', () => {
-      router.push('/intro')
+      router.push('/onboard')
     })
 
     window.addEventListener('resize', () => {
