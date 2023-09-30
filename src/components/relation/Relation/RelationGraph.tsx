@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import Chart from './Chart'
-import { fetchRelations } from './fetchRelations'
-import { RelationType } from './types'
+import Chart from '../Chart/Chart'
+import { fetchRelations } from '../services/fetchRelations'
+import { RelationType } from '../types'
 import styled from '@emotion/styled'
 
 const Container = styled.div`

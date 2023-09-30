@@ -1,7 +1,7 @@
 // CardDetail.tsx
 
 import styled from '@emotion/styled'
-import CardShowModal from './CardShowModal'
+import CardShowModal from './modals/CardShowModal'
 import { CardDetailPropsType } from './types'
 
 const Container = styled.div`

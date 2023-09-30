@@ -1,9 +1,9 @@
 import ChartContent from './ChartContent'
-import ZoomableSVG from './ZoomableSVG'
-import { fetchRelations } from './fetchRelations'
-import RelationModal from './RelationModal'
+import ZoomableSVG from '../ZoomableSVG'
+import { fetchRelations } from '../services/fetchRelations'
+import RelationModal from '../RelationModal'
 import { useState, useEffect } from 'react'
-import { NodeType, RelationType } from './types'
+import { NodeType, RelationType } from '../types'
 
 const Chart: React.FC = () => {
   const [dimensions, setDimensions] = useState({

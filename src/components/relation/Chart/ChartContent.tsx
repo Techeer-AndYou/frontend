@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { forceSimulation, forceLink, forceManyBody, forceCenter } from 'd3-force'
 import { select } from 'd3-selection'
-import { ChartContentPropsType } from './types'
+import { ChartContentPropsType } from '../types'
 
 const ChartContent: React.FC<ChartContentPropsType> = ({ data, width, height, onNodeClick }) => {
   const ref = useRef<SVGSVGElement>(null)

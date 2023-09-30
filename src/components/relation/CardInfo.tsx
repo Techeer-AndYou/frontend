@@ -1,10 +1,10 @@
 // CardInfo.tsx
 
 import React, { useEffect, useState } from 'react'
-import CardInfoUpdateModal from './CardInfoUpdateModal'
-import CardPhotoUpdateModal from './CardPhotoUpdateModal'
+import CardInfoUpdateModal from './modals/CardInfoUpdateModal'
+import CardPhotoUpdateModal from './modals/CardPhotoUpdateModal'
 import axios from 'axios'
-import { domain } from './domain'
+import { domain } from './utils/domain'
 
 export type CardPropsType = {
   name: string

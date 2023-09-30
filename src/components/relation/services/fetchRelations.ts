@@ -1,9 +1,9 @@
 // fetchRelations.ts
 
 import axios from 'axios'
-import { NodeType, LinkType, RelationType, RelationResponseType } from './types'
-import { domain } from './domain'
-import { mockData } from './mockData'
+import { NodeType, LinkType, RelationType, RelationResponseType } from '../types'
+import { domain } from '../utils/domain'
+import { mockData } from '../mockData'
 
 export const fetchRelations = async (): Promise<RelationType> => {
   const user_uuid = localStorage.getItem('user_uuid') // localStorage에서 user_uuid를 가져옵니다.

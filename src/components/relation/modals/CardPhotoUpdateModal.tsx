@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { FiUpload } from 'react-icons/fi'
 import { FaCamera } from 'react-icons/fa'
-import { domain } from './domain'
+import { domain } from '../utils/domain'
 
 type CardPhotoUpdateModalPropsType = {
   onSaveChanges: (data: { photo_url: string }) => void

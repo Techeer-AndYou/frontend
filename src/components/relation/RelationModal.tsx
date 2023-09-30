@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { domain } from './domain'
+import { domain } from './utils/domain'
 import CardDetail from './CardDetail'
 import { NodeType, UserType } from './types'
 import styled from '@emotion/styled'
