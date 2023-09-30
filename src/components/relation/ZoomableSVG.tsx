@@ -2,7 +2,6 @@ import { zoom, D3ZoomEvent, select } from 'd3'
 import { useRef, useState, useEffect } from 'react'
 import { ZoomableSVGPropsType } from './types'
 import Sky from './Sky'
-import './Sky.css'
 
 const ZoomableSVG: React.FC<ZoomableSVGPropsType> = ({ children, width, height }) => {
   const svgRef = useRef<SVGSVGElement | null>(null)

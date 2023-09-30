@@ -1,9 +1,55 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { domain } from './domain'
-import './Modal.css'
 import CardDetail from './CardDetail'
 import { NodeType, UserType } from './types'
+import styled from '@emotion/styled'
+
+const ModalOverlay = styled.div<{ modalVisible: boolean }>`
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: ${(props) => (props.modalVisible ? 'flex' : 'none')};
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+`
+
+const ModalContent = styled.div<{ modalVisible: boolean; animateSlideOut: boolean }>`
+  max-height: min-content;
+  max-width: 270px;
+  transform: translateX(-100%);
+  transition: transform 0.9s ease-out;
+
+  ${(props) =>
+    props.modalVisible &&
+    (props.animateSlideOut
+      ? `
+          animation: slide-out 0.3s forwards;
+        `
+      : `
+          animation: slide-in 0.3s forwards;
+        `)}
+
+  @keyframes slide-in {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-out {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+`
 
 const RelationModal: React.FC<{ node: NodeType; onClose: () => void }> = ({ node, onClose }) => {
   const [cardData, setCardData] = useState({
@@ -83,17 +129,8 @@ const RelationModal: React.FC<{ node: NodeType; onClose: () => void }> = ({ node
   }, [modalVisible])
 
   return (
-    <div
-      className={`fixed left-0 top-0 flex h-full w-full bg-black bg-opacity-50 py-10 ${
-        modalVisible ? 'flex' : 'hidden'
-      }`}
-    >
-      <div
-        className={`max-h-min max-w-[270px] modal-content ${
-          modalVisible ? (animateSlideOut ? 'animate-slide-out' : 'animate-slide-in') : ''
-        }`}
-      >
-        {/* <div className="w-full"> */}
+    <ModalOverlay modalVisible={modalVisible}>
+      <ModalContent modalVisible={modalVisible} animateSlideOut={animateSlideOut}>
         <CardDetail
           user_photo={userData.user_photo}
           card_name={cardData.card_name}
@@ -103,9 +140,8 @@ const RelationModal: React.FC<{ node: NodeType; onClose: () => void }> = ({ node
           card_intro={cardData.card_intro}
           memo={cardData.memo}
         />
-        {/* </div> */}
-      </div>
-    </div>
+      </ModalContent>
+    </ModalOverlay>
   )
 }
 

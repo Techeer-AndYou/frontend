@@ -1,5 +1,37 @@
 import React, { useEffect, useState } from 'react'
-import Star from './Star'
+import { StarPropsType } from './types'
+import styled from '@emotion/styled'
+import { keyframes } from '@emotion/react'
+
+const moveStarAnimation = keyframes`
+  from {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+`
+
+const SkyStyled = styled.svg`
+  width: 100vw;
+  height: 100vw;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ${moveStarAnimation} 240s linear infinite;
+  }
+`
+
+export const StarStyled = styled.circle`
+  fill: #fff;
+  stroke: none;
+  stroke-width: 0;
+`
+
+const Star: React.FC<StarPropsType> = ({ x, y, radius }) => {
+  return <StarStyled cx={x} cy={y} r={radius} fill='#fff' stroke='none' strokeWidth='0' />
+}
 
 const Sky: React.FC = () => {
   const makeStars = () => {
@@ -28,7 +60,7 @@ const Sky: React.FC = () => {
     }
   }, [])
 
-  return <svg className='sky'>{stars}</svg>
+  return <SkyStyled>{stars}</SkyStyled>
 }
 
 export default Sky

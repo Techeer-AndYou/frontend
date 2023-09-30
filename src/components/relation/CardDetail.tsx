@@ -2,16 +2,7 @@
 
 import styled from '@emotion/styled'
 import CardShowModal from './CardShowModal'
-
-export type CardDetailPropsType = {
-  user_photo: string
-  card_name: string
-  card_email: string
-  card_phone: string
-  card_photo: string
-  card_intro: string
-  memo: string
-}
+import { CardDetailPropsType } from './types'
 
 const Container = styled.div`
   display: flex;

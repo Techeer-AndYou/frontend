@@ -1,4 +1,20 @@
 // type.ts
+export type CardDetailPropsType = {
+  user_photo: string
+  card_name: string
+  card_email: string
+  card_phone: string
+  card_photo: string
+  card_intro: string
+  memo: string
+}
+
+export type StarPropsType = {
+  x: number
+  y: number
+  radius: number
+}
+
 export type RelationResponseType = {
   user_uid: string
   friend_uid: string
