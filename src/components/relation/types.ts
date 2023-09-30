@@ -1,4 +1,11 @@
 // type.ts
+export type RelationResponseType = {
+  user_uid: string
+  friend_uid: string
+  card_name: string
+  user_photo: string
+  relation_name: string
+}
 
 export type UserType = {
   user_name: string
