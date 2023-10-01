@@ -9,7 +9,6 @@ type UserInfoUpdateModalPropsType = {
 };
 
 
-
 export default function UserInfoUpdateModal({ onSaveChanges }: UserInfoUpdateModalPropsType) {
   const [showModal, setShowModal] = React.useState(false);
   const [user_name, setName] = React.useState("");
