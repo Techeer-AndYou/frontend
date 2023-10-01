@@ -1,21 +1,12 @@
 'use client'
+import styled from '@emotion/styled'
+
 import React from "react";
 import axios from "axios";
 import { FiUpload } from "react-icons/fi";
 import { FaCamera } from "react-icons/fa";
 import { domain } from "../../domain/domain";
-// SVG icon for the close button
-const CloseIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-  </svg>
-);
+import CloseIcon from '../common/CloseIcon';
 
 type UserPhotoUpdateModalProps = {
   onSaveChanges: (user_photo: string) => void;
@@ -70,41 +61,27 @@ export default function UserPhotoUpdateModal({ onSaveChanges }: UserPhotoUpdateM
 
   return (
     <>
-      <button
-        className="absolute bottom-2.5 right-2 z-10 p-2 bg-black/50 rounded-full focus:outline-none shadow-md"
+      <PhotoEditButton
         onClick={handleEditProfile}
       >
         <FaCamera size={18} color={"white"} />
-      </button>
+      </PhotoEditButton>
       {showModal ? (
         <>
-          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-[430px] my-6 mx-auto max-w-3xl">
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full h-full justify-center bg-white outline-none focus:outline-none">
-                {/*header*/}
-                <div className="w-full h-14 flex items-start justify-between border-b border-solid border-slate-200 rounded-t">
-                  <div className="text-[20px] font-semibold flex items-center w-full h-full px-8 pt-[8px]">
-                    프로필 사진
-                  </div>
-                  <button
-                    className="p-3 ml-auto bg-transparent border-0 text-black text-2xl leading-none font-semibold outline-none focus:outline-none transition-colors duration-300 hover:text-white hover:bg-red-500 rounded-full"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <CloseIcon />
-                  </button>
-                </div>
-                {/*body*/}
-                <div className="relative items-center justify-center px-4 flex-auto">
-                  <div className="my-8">
-                    <label
-                      htmlFor="photo"
-                      className="cursor-pointer bg-rememberBlue text-white active:bg-rememberBlueActive font-bold uppercase text-sm px-[130px] py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150 flex items-center justify-center"
-                    >
-                      <FiUpload className="mr-2" />
+          <MainContainer>
+            <div>
+              <ModalContainer>
+                <ModalHeader>
+                  <div>프로필 사진</div>
+                  <button onClick={() => setShowModal(false)}><CloseIcon /></button>
+                </ModalHeader>
+                <ModalBody>
+                  <div className="upload-button-container">
+                    <label htmlFor="photo">
+                      <FiUpload className="file-upload-icon" />
                       사진 업로드
                     </label>
                     <input
-                      className="hidden"
                       id="photo"
                       type="file"
                       accept="image/*" // Only allow image files to be selected
@@ -112,31 +89,242 @@ export default function UserPhotoUpdateModal({ onSaveChanges }: UserPhotoUpdateM
                     />
                   </div>
                   {selectedPhotoPreview && (
-                    <div className="mb-8">
+                    <div className="upload-img-container">
                       <img
                         src={selectedPhotoPreview}
                         alt="Selected Preview"
-                        className="w-full object-contain"
                       />
                     </div>
                   )}
-                </div>
-                {/*footer*/}
-                <div className="flex items-center justify-center p-3 border-t border-solid border-slate-200 rounded-b">
+                </ModalBody>
+                <ModalFooter>
                   <button
-                    className="bg-rememberBlue text-white active:bg-rememberBlueActive font-bold uppercase text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                     type="button"
                     onClick={handleSaveChanges}
                   >
                     저장하기
                   </button>
-                </div>
-              </div>
+                </ModalFooter>
+              </ModalContainer>
             </div>
-          </div>
-          <div className="opacity-60 fixed inset-0 z-40 bg-black"></div>
+          </MainContainer>
+          <ModalBackground></ModalBackground>
         </>
       ) : null}
     </>
   );
 }
+
+const PhotoEditButton = styled.button`
+  position: absolute;
+  z-index: 10;
+  padding: 0.5rem;
+  bottom: 0.625rem;
+  right: 0.5rem;
+  background-color: rgb(0 0 0)/50;
+  border-radius: 9999px;
+  :focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+`
+
+const MainContainer = styled.div`
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: fixed;
+  inset: 0px;
+  z-index: 50;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  :focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  & > div {
+    position: relative;
+    width: 430px;
+    margin: 1.5rem auto;
+    max-width: 48rem;
+  }
+`
+
+const ModalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  background-color: white;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  :focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  border-width: 0px;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  width: 100%;
+  height: 100%;
+`
+
+const ModalHeader = styled.div`
+  width: 100%;
+  height: 3.5rem;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(226, 232, 240);
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+
+  & > div {
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 8px 2rem;
+  }
+
+  & > button {
+    //  leading-none  transition-colors duration-300 
+    padding: 0.75rem;
+    margin-left: auto;
+    background-color: transparent;
+    border: 0px;
+    color: black;
+    font-size: 1.5rem;
+    line-height: 1;
+    font-weight: 600;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    :focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+    }
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms; 
+    :hover {
+      color: white;
+      background-color: rgb(127 29 29);
+    }
+    border-radius: 9999px;
+  }
+`
+
+const ModalBody = styled.div`
+  position: relative;
+  padding: 1rem 2rem;
+  flex: 1 1 auto;
+
+  .upload-button-containe {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .upload-img-container {
+    margin-bottom: 2rem;
+  }
+  & > div {
+    margin-bottom: 1rem;
+
+  & > label {
+    .file-upload-icon {
+      margin-right: 0.5rem;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: RGB(123, 199, 231);
+    cursor: pointer;
+    color: white;
+    :active {
+      background-color: RGB(123, 199, 231);
+    }
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding: 0.5rem 130px;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    :hover {
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    :focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+    }
+    margin-right: 0.25rem;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  & > input {
+    display: none;
+  }
+
+  & > img {
+    width: 100%;
+    object-fit: contain;
+  }
+}
+`
+
+const ModalFooter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  border-top: 1px solid rgb(226, 232, 240);
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+
+  & > button {
+    background-color: RGB(123, 199, 231);
+    color: white;
+    :active {
+      background-color: RGB(123, 199, 231);
+    }
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    :hover {
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    :focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+    }
+    margin-right: 0.25rem;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+`
+
+const ModalBackground = styled.div`
+  opacity: 0.6;
+  position: fixed;
+  background-color: black;
+  inset: 0px;
+  z-index: 40;
+`

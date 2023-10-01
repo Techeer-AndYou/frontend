@@ -26,22 +26,27 @@ type CardType = {
   card_photo: string;
 };
 
+type CountContainerProps = {
+  bgColor: string;
+  titleColor: string;
+}
+
 const UserPage: React.FC = () => {
   const [showCardInfo, setShowCardInfo] = useState<boolean>(true);
   const [showChart, setShowChart] = useState<boolean>(false);
 
   const [userData, setUserData] = useState<UserType>({
-    user_name: "김예빈",
-    user_email: "kimyeobin@naver.com",
-    password: "1234",
-    user_phone: "010-4645-7186",
-    user_photo: "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg",
+    user_name: "",
+    user_email: "",
+    password: "",
+    user_phone: "",
+    user_photo: "",
   });
 
   const [cardData, setCardData] = useState<CardType>({
-    card_name: "김예빈",
-    card_email: "kimyeobin12@gmail.com",
-    card_phone: "010-4645-7186",
+    card_name: "",
+    card_email: "",
+    card_phone: "",
     card_intro: "",
     card_photo: "",
   });
@@ -79,30 +84,29 @@ const UserPage: React.FC = () => {
     setShowCardInfo(component === "cardInfo");
     setShowChart(component === "chart");
   };
-
+  console.log(showCardInfo)
+  console.log(cardData)
   return (
-    <div className="font-['GmarketSansMedium'] flex w-screen h-screen bg-rememberWhiteHover">
-      <div className="ml-12 mr-12">
+    <BaseContainer>
+      <LeftContainer>
         <UserProfile userData={userData} setUserData={setUserData} />
-        <div className="flex justify-between items-center w-[270px]">
+        <ButtonContainer>
           <button
             onClick={() => handleButtonClick("cardInfo")}
             type="button"
-            className="shadow-sm w-[130px] h-[50px] flex justify-center items-center text-[13px] text-rememberBlack hover:text-white border border-blue-700 hover:bg-rememberBlue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-rememberBlue dark:focus:ring-rememberBlueActive"
           >
             내 명함
           </button>
           <button
             onClick={() => handleButtonClick("chart")}
             type="button"
-            className="shadow-sm w-[130px] h-[50px] flex justify-center items-center text-[13px] text-rememberBlack hover:text-white border border-blue-700 hover:bg-rememberBlue focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-rememberBlue dark:focus:ring-rememberBlueActive"
           >
             통계
           </button>
-        </div>
-      </div>
+        </ButtonContainer>
+      </LeftContainer>
       {showCardInfo && cardData && (
-        <div className="flex mt-12">
+        <CardInfoContainer>
           <CardInfo
             name={cardData.card_name}
             email={cardData.card_email}
@@ -114,82 +118,182 @@ const UserPage: React.FC = () => {
             <img
               src="https://github.com/SV-Summer-BootCamp-Team-F/frontend/blob/design/update-design-relation-page-69/src/pages/User/final_ad.png?raw=true"
               alt="ad"
-              className="ml-12 w-[230px] h-[603px] rounded-xl shadow-md"
             />
           </a>
-        </div>
+        </CardInfoContainer>
       )}
       {showChart && (
-        <div className="flex justify-center mt-12">
-          <div className="flex flex-col">
-            <div className="w-full h-[150px] mb-[20px] flex">
-              <div
-                className={`shadow-md py-4 px- flex flex-col items-center justify-around w-[150px] h-[150px] bg-white/50 rounded-xl mr-[20px]`}
-              >
-                <div className="text-gray-600 text-center text-[12px] flex justify-center items-center font-semibold">
-                  오늘 나를 조회한
-                  <br />
-                  사용자
+        <ChartContainer>
+          <CenterContainer>
+            <div className='count-info-container'>
+              <CountInfo bgColor='rgb(255,255,255)/50' titleColor='rgb(75 85 99)'>
+                <div className="count-title">오늘 나를 조회한<br />사용자</div>
+                <div className="count-container">
+                  <div className="count-num">20</div>
+                  <div className="count-unit">명</div>
                 </div>
-                <div className="flex items-end">
-                  <div className="text-gray-800 text-[25px] flex justify-center items-center font-semibold">
-                    20
-                  </div>
-                  <div className="text-[15px] pb-1 ml-[2px]">명</div>
+              </CountInfo>
+              <CountInfo bgColor='rgb(147 197 253)/50' titleColor='black'>
+                <div className="count-title">지금까지 내 명함을 본 사용자</div>
+                <div className="count-container">
+                  <div className="count-num">127</div>
+                  <div className="count-unit">명</div>
                 </div>
-              </div>
-              <div
-                className={`shadow-md py-4 px-3 flex flex-col items-center justify-around w-[150px] h-[150px] bg-blue-300/50 rounded-xl mr-[20px]`}
-              >
-                <div className="text-black text-center text-[12px] flex justify-center items-center font-semibold">
-                  지금까지 내 명함을 본 사용자
+              </CountInfo>
+              <CountInfo bgColor='rgb(255,255,255)/50' titleColor='rgb(75 85 99)'>
+                <div className="count-title">오늘 추가한 명함</div>
+                <div className="count-container">
+                  <div className="count-num">7</div>
+                  <div className="count-unit">개</div>
                 </div>
-                <div className="flex items-end">
-                  <div className="text-gray-800 text-[25px] flex justify-center items-center font-semibold">
-                    127
-                  </div>
-                  <div className="text-[15px] pb-1 ml-[2px]">명</div>
+              </CountInfo>
+              <CountInfo bgColor='rgb(147 197 253)/50' titleColor='black'>
+                <div className="count-title">지금까지 추가한 명함</div>
+                <div className="count-container">
+                  <div className="count-num">104</div>
+                  <div className="count-unit">개</div>
                 </div>
-              </div>
-              <div
-                className={`shadow-md py-4 px-3 flex flex-col items-center justify-around w-[150px] h-[150px] bg-white/50 rounded-xl mr-[20px]`}
-              >
-                <div className="text-gray-600 text-center text-[12px] flex justify-center items-center font-semibold">
-                  오늘 추가한 명함
-                </div>
-                <div className="flex items-end">
-                  <div className="text-gray-800 text-[25px] flex justify-center items-center font-semibold">
-                    7
-                  </div>
-                  <div className="text-[15px] pb-1 ml-[2px]">개</div>
-                </div>
-              </div>
-              <div
-                className={`shadow-md py-4 px-2 flex flex-col items-center justify-around w-[150px] h-[150px] bg-blue-300/50 rounded-xl mr-[20px]`}
-              >
-                <div className="text-black text-center text-[12px] flex justify-center items-center font-semibold">
-                  지금까지 추가한 명함
-                </div>
-                <div className="flex items-end">
-                  <div className="text-gray-800 text-[25px] flex justify-center items-center font-semibold">
-                    104
-                  </div>
-                  <div className="text-[15px] pb-1 ml-[2px]">개</div>
-                </div>
-              </div>
+              </CountInfo>
             </div>
             <LineChart />
-          </div>
-          <div className="flex flex-col">
-            <div className="mb-[20px]">
-              <PieChart />
-            </div>
+          </CenterContainer>
+          <RightContainer>
+            <div><PieChart /></div>
             <BarChart />
-          </div>
-        </div>
+          </RightContainer>
+        </ChartContainer>
       )}
-    </div>
+    </BaseContainer>
   );
 };
 
+const BaseContainer = styled.div`
+  display: flex;
+  font-family: 'GmarketSansMedium';
+  width: 100vw;
+  height: 100vh;
+  background-color: lightgray;
+`
+
+const LeftContainer = styled.div`
+  margin-left: 3rem;
+  margin-right: 3rem;
+`
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 270px;
+
+  & > button {
+    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.05)); 
+    width: 130px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color: black;
+    :hover {
+      color: white;
+      background-color: RGB(123, 199, 231);
+    }
+    border: 1px solid RGB(238, 238, 238);
+    :focus {
+      box-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+      outline-width: 0px;
+      --tw-ring-color: rgb(147 197 253);
+    }
+    font-size: medium;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    //dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-rememberBlue dark:focus:ring-rememberBlueActive
+  }
+`
+
+const CardInfoContainer = styled.div`
+  display: flex;
+  margin-top: 3rem;
+
+  & > a {
+    & > img {
+      margin-left: 3rem;
+      width: 230px;
+      height: 603px;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+  }
+`
+
+const ChartContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+`
+const CenterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  .count-info-container {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 20px;
+    display: flex;
+  }
+`
+
+const CountInfo = styled.div<CountContainerProps>`
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 150px;
+  height: 150px;
+  background-color: ${(props) => props.bgColor};
+  border-radius: 0.75rem;
+  margin-right: 20px;
+
+  .count-title {
+    color: ${(props) => props.titleColor};
+    text-align: center;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+  }
+
+  .count-container {
+    display: flex;
+    align-items: end;
+
+    .count-num {
+      color: black;
+      font-size: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .count-unit {
+      font-size: 15px;
+      padding-bottom: 0.25rem;
+      margin-left: 2px;
+    }
+  }
+`
+
+const RightContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  & > div {
+    margin-bottom: 20px;
+  }
+`
 export default UserPage;

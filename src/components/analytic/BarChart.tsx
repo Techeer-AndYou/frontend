@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HC_more from "highcharts/highcharts-more";
@@ -65,10 +66,18 @@ const BarChart = () => {
   };
 
   return (
-    <div className="rounded-lg w-[350px] h-[250px] bg-rgb(255, 255, 255, 1) shadow-md ">
+    <ChartContainer>
       <HighchartsReact highcharts={Highcharts} options={options} />
-    </div>
+    </ChartContainer>
   );
 };
+
+const ChartContainer = styled.div`
+  border-radius: 0.5rem;
+  width: 350px;
+  height: 250px;
+  background-color: rgb(255, 255, 255, 1);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+`
 
 export default BarChart;

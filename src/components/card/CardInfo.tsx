@@ -56,28 +56,65 @@ const CardInfo: React.FC<CardPropsType> = ({ name, email, phoneNumber, introduct
   };
 
   return (
-    <div className="rounded-lg shadow-md flex flex-col justify-around items-center w-[600px] h-[600px]">
-      <div className="relative">
-        <img className="w-[500px] h-[300px] object-cover" src={updatedPhoto} alt="Card Photo" />
+    <MainContainer>
+      <CardPhotoContainer>
+        <img src={updatedPhoto} alt="Card Photo" />
         {/* onSaveChanges 함수를 handlePhotoSaveChanges로 변경 */}
         <CardPhotoUpdateModal onSaveChanges={handlePhotoSaveChanges} />
-      </div>
-      <div className="flex justify-around items-center w-full">
+      </CardPhotoContainer>
+      <CardInfoContaiener>
         <div>
-          <h2 className="text-[26px] mb-[14px] font-semibold">{updatedName}</h2>
-          <p className=" text-gray-600 mt-8 text-[13px] underline underline-offset-[15px] decoration-gray-300">
-            이메일: {updatedEmail}
-          </p>
-          <p className=" text-gray-600 mt-8 text-[13px] underline underline-offset-[15px] decoration-gray-300">
-            전화번호: {phoneNumber}
-          </p>
-          <p className=" text-gray-600 mt-8 text-[13px] underline underline-offset-[15px] decoration-gray-300">
-            소개: {updatedIntro}
-          </p>
+          <h2>{updatedName}</h2>
+          <p>이메일: {updatedEmail}</p>
+          <p>전화번호: {phoneNumber}</p>
+          <p>소개: {updatedIntro}</p>
         </div>
         <CardInfoUpdateModal onSaveChanges={handleSaveChanges} updatedPhoto={""} />
-      </div>
-    </div>
+      </CardInfoContaiener>
+    </MainContainer>
   );
 };
+
+const MainContainer = styled.div`
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 600px;
+  height: 600px;
+`
+
+const CardPhotoContainer = styled.div`
+  position: relative;
+
+  & > img {
+    width: 500px;
+    height: 300px;
+    object-fit: cover;
+  }
+`
+
+const CardInfoContaiener = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+
+  & > h2 {
+    font-size: 26px;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  & > p {
+    color: rgb(75 85 99);
+    margin-top: 2rem;
+    font-size: 13px;
+    text-decoration: underline;
+    text-underline-offset: 15px;
+    text-decoration-color: #d1d5db;
+  }
+`
 export default CardInfo;
