@@ -1,7 +1,4 @@
-<<<<<<< Updated upstream
 import styled from "@emotion/styled";
-=======
->>>>>>> Stashed changes
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HC_more from "highcharts/highcharts-more";
@@ -69,7 +66,6 @@ const BarChart = () => {
   };
 
   return (
-<<<<<<< Updated upstream
     <ChartContainer>
       <HighchartsReact highcharts={Highcharts} options={options} />
     </ChartContainer>
@@ -84,12 +80,4 @@ const ChartContainer = styled.div`
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 `
 
-=======
-    <div className="rounded-lg w-[350px] h-[250px] bg-rgb(255, 255, 255, 1) shadow-md ">
-      <HighchartsReact highcharts={Highcharts} options={options} />
-    </div>
-  );
-};
-
->>>>>>> Stashed changes
 export default BarChart;
