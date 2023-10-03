@@ -92,6 +92,20 @@ body {
   font-size: 1.6rem; /* 기본 폰트 크기를 16px로 설정; 16px = 1.6rem */
   color: rgb(var(--foreground-rgb));
   /* 여기에 배경색, 텍스트 색상 등 body에 대한 기본 스타일을 설정하세요 */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  @media (hover: none) and (pointer: coarse),
+    (-webkit-min-device-pixel-ratio: 1.5),
+    (min-resolution: 120dpi) {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
 
 /* 링크의 기본 스타일 설정 */
