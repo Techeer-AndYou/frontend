@@ -13,7 +13,7 @@ export type CardInfoUpdateModalPropsType = {
   updatedPhoto: string;
 };
 
-export default function CardInfoUpdateModal({ onSaveChanges }: CardInfoUpdateModalPropsType) {
+const CardInfoUpdateModal: React.FC<CardInfoUpdateModalPropsType> = ({ onSaveChanges }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [card_name, setName] = React.useState("");
   const [card_email, setEmail] = React.useState("");
@@ -290,3 +290,5 @@ const ModalBackground = styled.div`
   inset: 0px;
   z-index: 40;
 `
+
+export default CardInfoUpdateModal;

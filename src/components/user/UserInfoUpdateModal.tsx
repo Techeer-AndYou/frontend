@@ -9,7 +9,7 @@ type UserInfoUpdateModalPropsType = {
 };
 
 
-export default function UserInfoUpdateModal({ onSaveChanges }: UserInfoUpdateModalPropsType) {
+const UserInfoUpdateModal: React.FC<UserInfoUpdateModalPropsType> = ({ onSaveChanges }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [user_name, setName] = React.useState("");
   const [user_email, setEmail] = React.useState("");
@@ -289,3 +289,5 @@ const ModalBackground = styled.div`
   inset: 0px;
   z-index: 40;
 `
+
+export default UserInfoUpdateModal;

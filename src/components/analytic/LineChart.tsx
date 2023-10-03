@@ -7,7 +7,7 @@ import HC_exporting from "highcharts/modules/exporting";
 HC_more(Highcharts);
 HC_exporting(Highcharts);
 
-const LineChart: React.FC = () => {
+const LineChart = () => {
   const options: Highcharts.Options = {
     colors: ["#7CC7E8", "#01579B"],
     chart: {

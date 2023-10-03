@@ -6,10 +6,12 @@ import UserInfoUpdateModal from "./UserInfoUpdateModal";
 import UserPhotoUpdateModal from "./UserPhotoUpdateModal";
 import { UserType } from "../../app/(user)/mypage/page";
 import { domain } from "../../domain/domain";
+
 export type UserPropsType = {
   userData: UserType;
   setUserData: React.Dispatch<React.SetStateAction<UserType>>;
 };
+
 export type UserUpdatePropsType = {
   user_id: number;
   name: string;
@@ -17,11 +19,14 @@ export type UserUpdatePropsType = {
   passwd: string;
   update_at: string;
 };
+
 export type UserPhotoUpdatePropsType = {
   user_id: number;
   photo: string;
 };
+
 const user_uuid = localStorage.getItem("user_uuid");
+
 const UserProfile: React.FC<UserPropsType> = ({ userData, setUserData }) => {
   // State to store updated user data
 
@@ -44,11 +49,13 @@ const UserProfile: React.FC<UserPropsType> = ({ userData, setUserData }) => {
       }
     } catch (error) {}
   };
+
   const handlePhotoSaveChanges = async (user_photo: string) => {
     setUserData((prev) => {
       return { ...prev, user_photo };
     });
   };
+  
   return (
     <UserProfileContainer>
       <UserPhotoContainer >

@@ -12,7 +12,7 @@ type UserPhotoUpdateModalProps = {
   onSaveChanges: (user_photo: string) => void;
 };
 
-export default function UserPhotoUpdateModal({ onSaveChanges }: UserPhotoUpdateModalProps) {
+const UserPhotoUpdateModal: React.FC<UserPhotoUpdateModalProps> = ({ onSaveChanges }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [selectedPhoto, setSelectedPhoto] = React.useState<File | null>(null);
   const [selectedPhotoPreview, setSelectedPhotoPreview] = React.useState<string | null>(null);
@@ -328,3 +328,5 @@ const ModalBackground = styled.div`
   inset: 0px;
   z-index: 40;
 `
+
+export default UserPhotoUpdateModal;

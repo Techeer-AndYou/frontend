@@ -11,7 +11,7 @@ type CardPhotoUpdateModalPropsType = {
   onSaveChanges: (data: { photo_url: string }) => void;
 };
 
-export default function CardPhotoUpdateModal({ onSaveChanges }: CardPhotoUpdateModalPropsType) {
+const CardPhotoUpdateModal: React.FC<CardPhotoUpdateModalPropsType> = ({ onSaveChanges }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [selectedPhoto, setSelectedPhoto] = React.useState<File | null>(null); // New state for the selected photo file
   const user_uuid = localStorage.getItem("user_uuid");
@@ -330,3 +330,5 @@ const ModalBackground = styled.div`
   inset: 0px;
   z-index: 40;
 `
+
+export default CardPhotoUpdateModal;

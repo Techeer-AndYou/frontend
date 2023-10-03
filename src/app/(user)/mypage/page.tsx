@@ -31,7 +31,7 @@ type CountContainerProps = {
   titleColor: string;
 }
 
-const UserPage: React.FC = () => {
+export default function userPage() {
   const [showCardInfo, setShowCardInfo] = useState<boolean>(true);
   const [showChart, setShowChart] = useState<boolean>(false);
 
@@ -296,4 +296,3 @@ const RightContainer = styled.div`
     margin-bottom: 20px;
   }
 `
-export default UserPage;
