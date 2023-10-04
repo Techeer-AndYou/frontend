@@ -8,7 +8,7 @@ export async function GET(
   const mockUsers = [
     {
       user_uuid: 'abcd',
-      user_info: {
+      result: {
         user_name: "김예빈",
         user_email: "kimyeobin12@gmail.com",
         password: "1234",
@@ -21,7 +21,7 @@ export async function GET(
   const userData = mockUsers.find((user) => user.user_uuid === params.slug);
 
   return new Response(
-    JSON.stringify(userData?.user_info),
+    JSON.stringify(userData),
     {
       status: 200,
       headers: {

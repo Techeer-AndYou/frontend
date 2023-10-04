@@ -173,7 +173,7 @@ const BaseContainer = styled.div`
   font-family: 'GmarketSansMedium';
   width: 100vw;
   height: 100vh;
-  background-color: lightgray;
+  background-color: rgb(242, 242, 242);
 `
 
 const LeftContainer = styled.div`

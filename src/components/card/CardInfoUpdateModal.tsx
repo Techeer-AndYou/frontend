@@ -12,7 +12,6 @@ export type CardInfoUpdateModalPropsType = {
   }) => Promise<void>;
   updatedPhoto: string;
 };
-
 const CardInfoUpdateModal: React.FC<CardInfoUpdateModalPropsType> = ({ onSaveChanges }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [card_name, setName] = React.useState("");
