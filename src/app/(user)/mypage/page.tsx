@@ -69,7 +69,7 @@ export default function userPage() {
       });
 
     axios
-      .get(`${domain}:8000/api/v1/cards/info/${user_uuid}/`)
+      .get(`${domain}:3000/api/v1/cards/info/${user_uuid}/`)
       .then((response) => {
         // 로그인 성공 시 처리
         const cardData: { result: CardType } = response.data;
