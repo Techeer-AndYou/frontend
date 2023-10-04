@@ -52,9 +52,11 @@ export default function userPage() {
   });
 
   useEffect(() => {
-    const user_uuid = localStorage.getItem("user_uuid");
+    //const user_uuid = localStorage.getItem("user_uuid");
+    const user_uuid = 'abcd'; // api mocking test
+
     axios
-      .get(`${domain}:8000/api/v1/users/info/${user_uuid}/`)
+      .get(`${domain}:3000/api/v1/users/info/${user_uuid}/`)
       .then((response) => {
         // 로그인 성공 시 처리
         const userData: { result: UserType } = response.data;
@@ -84,8 +86,7 @@ export default function userPage() {
     setShowCardInfo(component === "cardInfo");
     setShowChart(component === "chart");
   };
-  console.log(showCardInfo)
-  console.log(cardData)
+  
   return (
     <BaseContainer>
       <LeftContainer>
