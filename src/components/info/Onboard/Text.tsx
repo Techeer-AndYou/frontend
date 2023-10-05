@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import styled from '@emotion/styled'
+import { color } from 'highcharts'
+import { link } from 'fs'
 
 // 분리하기
 const handleScrollToTop = () => {
@@ -10,13 +12,16 @@ const handleScrollToTop = () => {
 }
 
 const Title = styled.h1`
-  & .text4 {
-    color: skyblue;
+  span {
+    background: linear-gradient(97deg, #ff00e5 21.55%, #e94646 74.82%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 `
 
 const ClickText = styled.div`
-  position: absolute;
+  position: relative;
   top: 70%;
   left: 49.7%;
   transform: translate(-50%, -50%);
@@ -74,7 +79,9 @@ const Text = () => {
         Remember <span>plus+</span>
       </RememberText>
       <Link href='/login'>
-        시작하기
+        <h1 style={{ color: 'linear-gradient(97deg, #ff00e5 21.55%, #e94646 74.82%)' }}>
+          시작하기
+        </h1>
         <EnterLink>Enter</EnterLink>
       </Link>
       <ScrollTopButton onClick={handleScrollToTop}>맨 위로</ScrollTopButton>
