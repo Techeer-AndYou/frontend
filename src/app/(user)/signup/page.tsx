@@ -98,7 +98,7 @@ export default function signupPage() {
         <SignupContainer>
           {/*잠시 반응형이슈 <Logo src={logo} alt="로고 이미지" /> */}
           <RememberStyle>
-            <h2>Remember</h2> <span className='plus'>plus+</span>
+            Remember <span className='plus'>plus+</span>
           </RememberStyle>
           <SignUpTitle>회원가입</SignUpTitle>
 
