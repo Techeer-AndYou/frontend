@@ -1,5 +1,5 @@
 'use client'
-import Onboard from '@/components/info/Onboard'
+import Onboard from '@/components/info/onboard'
 
 export default function onboardPage() {
   return (
