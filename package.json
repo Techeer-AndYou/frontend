@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "prettier src --write && eslint src --fix"
+    "lint": "prettier src --write && eslint src --fix",
+    "format":"prettier --check --ignore-path .gitignore ."
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -16,7 +17,7 @@
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "@types/three": "^0.156.0",
-    "axios": "^1.5.0",
+    "axios": "^1.5.1",
     "d3": "^7.8.5",
     "d3-selection": "^3.0.0",
     "highcharts": "^11.1.0",
@@ -24,6 +25,7 @@
     "next": "^13.5.2",
     "normalize.css": "^8.0.1",
     "react": "18.2.0",
+    "react-bootstrap": "^2.9.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
     "three": "^0.156.1",
@@ -32,6 +34,7 @@
   "devDependencies": {
     "@types/d3-force": "^3.0.6",
     "@types/d3-selection": "^3.0.7",
+    "@emotion/babel-plugin": "^11.11.0",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
     "eslint": "^8.49.0",
