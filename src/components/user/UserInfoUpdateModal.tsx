@@ -202,7 +202,6 @@ const ModalHeader = styled.div`
     transition-duration: 300ms; 
     :hover {
       color: RGB(123, 199, 231);
-      //background-color: lightblue;
       cursor: pointer;
     }
     border-radius: 9999px;
@@ -248,7 +247,6 @@ const ModalBody = styled.div`
 `
 
 const ModalFooter = styled.div`
-  //className="flex items-center justify-center p-3 border-t border-solid border-slate-200 rounded-b"
   display: flex;
   align-items: center;
   justify-content: center;
@@ -259,31 +257,6 @@ const ModalFooter = styled.div`
   height: 76px;
 
   & > button {
-    /* background-color: RGB(123, 199, 231);
-    color: white;
-    :active {
-      background-color: RGB(123, 199, 231);
-    }
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    border-radius: 0.25rem;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    :hover {
-      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    }
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    :focus {
-      outline: 2px solid transparent;
-      outline-offset: 2px;
-    }
-    margin-right: 0.25rem;
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms; */
     width: 120px;
     height: 40px;
     color: white;
@@ -296,6 +269,7 @@ const ModalFooter = styled.div`
     :hover {
       background-color: RGB(123, 199, 231);
       opacity: 0.8;
+      cursor: pointer;
     }
     :focus {
       outline: 2px solid transparent;
