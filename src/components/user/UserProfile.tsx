@@ -78,6 +78,7 @@ const UserProfile: React.FC<UserPropsType> = ({ userData, setUserData }) => {
 
 const UserProfileContainer = styled.div`
   width: 270px;
+  height: 500px;
   max-width: 32rem;
   margin-top: 3rem;
   margin-bottom: 40px;

@@ -179,6 +179,10 @@ const BaseContainer = styled.div`
 const LeftContainer = styled.div`
   margin-left: 3rem;
   margin-right: 3rem;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `
 
 const ButtonContainer = styled.div`
@@ -188,25 +192,22 @@ const ButtonContainer = styled.div`
   width: 270px;
 
   & > button {
-    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.05)); 
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
     width: 130px;
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 13px;
+    font-size: 1.6rem;
     color: black;
     :hover {
       color: white;
       background-color: RGB(123, 199, 231);
+      cursor: pointer;
+      border: none;
     }
-    border: 1px solid RGB(238, 238, 238);
-    :focus {
-      box-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-      outline-width: 0px;
-      --tw-ring-color: rgb(147 197 253);
-    }
-    font-size: medium;
+    border: 1px solid rgb(224, 224, 224);
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;
     //dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-rememberBlue dark:focus:ring-rememberBlueActive
