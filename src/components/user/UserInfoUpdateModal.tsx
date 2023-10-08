@@ -108,6 +108,7 @@ const EditProfileButton = styled.button`
   :hover {
     background-color: RGB(123, 199, 231);
     opacity: 0.8;
+    cursor: pointer;
   }
   :focus {
     outline: 2px solid transparent;

@@ -80,18 +80,17 @@ const MainContainer = styled.div`
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  width: 600px;
+  width: 770px;
   height: 600px;
 `
 
 const CardPhotoContainer = styled.div`
   position: relative;
-
+  margin-bottom: 4rem;
   & > img {
-    width: 500px;
-    height: 300px;
+    width: 600px;
     object-fit: cover;
   }
 `
@@ -102,15 +101,9 @@ const CardInfoContaiener = styled.div`
   align-items: center;
   width: 100%;
 
-  & > h2 {
-    font-size: 26px;
-    margin-bottom: 14px;
-    font-weight: 600;
-  }
-
-  & > p {
+  & > div > p {
     color: rgb(75 85 99);
-    margin-top: 2rem;
+    margin-top: 3rem;
     font-size: 13px;
     text-decoration: underline;
     text-underline-offset: 15px;

@@ -9,6 +9,7 @@ import UserProfile from "../../../components/user/UserProfile";
 import BarChart from "../../../components/analytic/BarChart";
 import axios from "axios";
 import { domain } from "../../../domain/domain";
+import Image from 'next/image'
 
 export type UserType = {
   user_name: string;
@@ -115,40 +116,44 @@ export default function userPage() {
             introduction={cardData.card_intro}
             photo={cardData.card_photo}
           />
-          <a href="https://youtu.be/su8KH8jT7e0" target="_blank" rel="noopener noreferrer">
+          <div className="advertising-container">
+            <a href="https://youtu.be/su8KH8jT7e0" target="_blank" rel="noopener noreferrer">
             <img
-              src="https://github.com/SV-Summer-BootCamp-Team-F/frontend/blob/design/update-design-relation-page-69/src/pages/User/final_ad.png?raw=true"
+              src="/images/final_ad.png"
               alt="ad"
+              width={230}
+              height={600}
             />
           </a>
+          </div>
         </CardInfoContainer>
       )}
       {showChart && (
         <ChartContainer>
           <CenterContainer>
             <div className='count-info-container'>
-              <CountInfo bgColor='rgb(255,255,255)/50' titleColor='rgb(75 85 99)'>
+              <CountInfo bgColor='RGB(249, 249, 249)' titleColor='rgb(75 85 99)'>
                 <div className="count-title">오늘 나를 조회한<br />사용자</div>
                 <div className="count-container">
                   <div className="count-num">20</div>
                   <div className="count-unit">명</div>
                 </div>
               </CountInfo>
-              <CountInfo bgColor='rgb(147 197 253)/50' titleColor='black'>
-                <div className="count-title">지금까지 내 명함을 본 사용자</div>
+              <CountInfo bgColor='RGB(195, 220, 249)' titleColor='black'>
+                <div className="count-title">지금까지 내 명함을 본<br />사용자</div>
                 <div className="count-container">
                   <div className="count-num">127</div>
                   <div className="count-unit">명</div>
                 </div>
               </CountInfo>
-              <CountInfo bgColor='rgb(255,255,255)/50' titleColor='rgb(75 85 99)'>
+              <CountInfo bgColor='RGB(249, 249, 249)' titleColor='rgb(75 85 99)'>
                 <div className="count-title">오늘 추가한 명함</div>
                 <div className="count-container">
                   <div className="count-num">7</div>
                   <div className="count-unit">개</div>
                 </div>
               </CountInfo>
-              <CountInfo bgColor='rgb(147 197 253)/50' titleColor='black'>
+              <CountInfo bgColor='RGB(195, 220, 249)' titleColor='black'>
                 <div className="count-title">지금까지 추가한 명함</div>
                 <div className="count-container">
                   <div className="count-num">104</div>
@@ -170,6 +175,7 @@ export default function userPage() {
 
 const BaseContainer = styled.div`
   display: flex;
+  justify-content: center;
   font-family: 'GmarketSansMedium';
   width: 100vw;
   height: 100vh;
@@ -177,7 +183,7 @@ const BaseContainer = styled.div`
 `
 
 const LeftContainer = styled.div`
-  margin-left: 3rem;
+  //margin-left: 3rem;
   margin-right: 3rem;
   margin-top: 3rem;
   height: 600px;
@@ -219,14 +225,12 @@ const CardInfoContainer = styled.div`
   display: flex;
   margin-top: 3rem;
 
-  & > a {
-    & > img {
-      margin-left: 3rem;
-      width: 230px;
-      height: 603px;
-      border-radius: 0.75rem;
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    }
+  .advertising-container {
+    margin-left: 3rem;
+    width: 230px;
+    height: 603px;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   }
 `
 

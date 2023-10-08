@@ -66,8 +66,8 @@ const UserProfile: React.FC<UserPropsType> = ({ userData, setUserData }) => {
         <UserPhotoUpdateModal onSaveChanges={handlePhotoSaveChanges} />
       </UserPhotoContainer>
       <UserInfoUpdateContainer>
-        <p className="user-name">김예빈</p>
-        <p className="user-email">kimyeobin@naver.com</p>
+        <p className="user-name">{userData.user_name}</p>
+        <p className="user-email">{userData.user_email}</p>
         <UserInfoUpdateModal onSaveChanges={handleSaveChanges} />
       </UserInfoUpdateContainer>
     </UserProfileContainer>

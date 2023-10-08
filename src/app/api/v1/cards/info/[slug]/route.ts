@@ -1,5 +1,4 @@
 // app/api/v1/cards/info/user_uuid/route.ts
-
 export async function GET(
   request: Request,
   { params }: { params: { slug: string } }
@@ -13,7 +12,7 @@ export async function GET(
         card_email: "kimyeobin12@gmail.com",
         card_intro: "안녕하세요!!",
         card_phone: "010-0000-0000",
-        card_photo: "",
+        card_photo: "/images/test_card_photo.png",
       }
     }
   ]
