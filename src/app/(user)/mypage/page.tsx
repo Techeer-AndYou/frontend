@@ -179,6 +179,7 @@ const BaseContainer = styled.div`
 const LeftContainer = styled.div`
   margin-left: 3rem;
   margin-right: 3rem;
+  margin-top: 3rem;
   height: 600px;
   display: flex;
   flex-direction: column;

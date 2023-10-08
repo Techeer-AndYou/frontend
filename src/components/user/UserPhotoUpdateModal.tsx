@@ -64,7 +64,7 @@ const UserPhotoUpdateModal: React.FC<UserPhotoUpdateModalProps> = ({ onSaveChang
       <PhotoEditButton
         onClick={handleEditProfile}
       >
-        <FaCamera size={18} color={"white"} />
+        <FaCamera size={20} color={"white"} />
       </PhotoEditButton>
       {showModal ? (
         <>
@@ -121,11 +121,17 @@ const PhotoEditButton = styled.button`
   padding: 0.5rem;
   bottom: 0.625rem;
   right: 0.5rem;
-  background-color: rgb(0 0 0)/50;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(66, 66, 66, 0.358);
+  border: none;
   border-radius: 9999px;
   :focus {
     outline: 2px solid transparent;
     outline-offset: 2px;
+  }
+  :hover {
+    cursor: pointer;
   }
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 `
