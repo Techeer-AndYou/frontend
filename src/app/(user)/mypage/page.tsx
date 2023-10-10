@@ -3,13 +3,19 @@ import styled from '@emotion/styled'
 
 import React, { useEffect, useState } from "react";
 import CardInfo from "../../../components/card/CardInfo";
-import LineChart from "../../../components/analytic/LineChart";
-import PieChart from "../../../components/analytic/PieChart";
+// 성능 변화 확인할 때 사용하라고 일단 냅둡니다. 지우면 되는 코드예요.
+// import LineChart from "../../../components/analytic/LineChart";
+// import PieChart from "../../../components/analytic/PieChart";
+// import BarChart from "../../../components/analytic/BarChart";
 import UserProfile from "../../../components/user/UserProfile";
-import BarChart from "../../../components/analytic/BarChart";
 import axios from "axios";
 import { domain } from "../../../domain/domain";
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
+
+const LineChart = dynamic(() => import('../../../components/analytic/LineChart'));
+const PieChart = dynamic(() => import('../../../components/analytic/PieChart'));
+const BarChart = dynamic(() => import('../../../components/analytic/BarChart'));
 
 export type UserType = {
   user_name: string;
