@@ -3,19 +3,29 @@ import styled from '@emotion/styled'
 
 import React, { useEffect, useState } from "react";
 import CardInfo from "../../../components/card/CardInfo";
-// 성능 변화 확인할 때 사용하라고 일단 냅둡니다. 지우면 되는 코드예요.
-// import LineChart from "../../../components/analytic/LineChart";
-// import PieChart from "../../../components/analytic/PieChart";
-// import BarChart from "../../../components/analytic/BarChart";
 import UserProfile from "../../../components/user/UserProfile";
 import axios from "axios";
 import { domain } from "../../../domain/domain";
-import Image from 'next/image'
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 
-const LineChart = dynamic(() => import('../../../components/analytic/LineChart'));
-const PieChart = dynamic(() => import('../../../components/analytic/PieChart'));
-const BarChart = dynamic(() => import('../../../components/analytic/BarChart'));
+const LineChart = dynamic(
+  () => import('../../../components/analytic/LineChart'),
+  {
+    loading: () => <div className='line-chart-skeleton'></div>
+  },
+);
+const PieChart = dynamic(
+  () => import('../../../components/analytic/PieChart'),
+  {
+    loading: () => <div className='pie-chart-skeleton'></div>
+  }
+);
+const BarChart = dynamic(
+  () => import('../../../components/analytic/BarChart'),
+  {
+    loading: () => <div className='bar-chart-skeleton'></div>
+  }
+);
 
 export type UserType = {
   user_name: string;
@@ -244,6 +254,27 @@ const ChartContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 3rem;
+
+  .line-chart-skeleton {
+    width: 660px;
+    height: 430px;
+    background-color: rgb(222, 222, 222);
+    border-radius: 0.5rem;
+  }
+
+  .pie-chart-skeleton {
+    width: 350px;
+    height: 330px;
+    background-color: rgb(222, 222, 222);
+    border-radius: 0.5rem;
+  }
+
+  .bar-chart-skeleton {
+    width: 350px;
+    height: 250px;
+    background-color: rgb(222, 222, 222);
+    border-radius: 0.5rem;
+  }
 `
 const CenterContainer = styled.div`
   display: flex;
