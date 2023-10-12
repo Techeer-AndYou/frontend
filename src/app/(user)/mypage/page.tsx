@@ -6,6 +6,7 @@ import CardInfo from "../../../components/card/CardInfo";
 import UserProfile from "../../../components/user/UserProfile";
 import axios from "axios";
 import { domain } from "../../../domain/domain";
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 const LineChart = dynamic(
@@ -134,7 +135,7 @@ export default function userPage() {
           />
           <div className="advertising-container">
             <a href="https://youtu.be/su8KH8jT7e0" target="_blank" rel="noopener noreferrer">
-            <img
+            <Image
               src="/images/final_ad.png"
               alt="ad"
               width={230}
