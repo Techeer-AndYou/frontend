@@ -116,10 +116,49 @@ const EnterText = styled.div`
     color: blue;
   }
 `
+
+const TopButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  gap: 4px;
+
+  position: fixed; // 고정 포지션으로 변경
+  bottom: 20px; // 페이지 하단에서 20px 떨어진 위치
+  right: 20px; // 페이지 우측에서 20px 떨어진 위치
+  width: 62px;
+  height: 66px;
+
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+
+  background: none;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 58px;
+  color: #d2cea3;
+
+  &:focus {
+    outline: none;
+  }
+`
+
 const handleScrollDown = () => {
   // 현재 스크롤 위치를 가져와서 100vh만큼 더한 위치로 스크롤
   window.scrollTo({
     top: window.scrollY + window.innerHeight, // 현재 위치에 100vh를 더한 값
+    behavior: 'smooth', // 부드럽게 스크롤
+  })
+}
+
+const handleScrollTop = () => {
+  window.scrollTo({
+    top: 0,
     behavior: 'smooth', // 부드럽게 스크롤
   })
 }
@@ -178,6 +217,7 @@ export default function MainPage() {
           </p>
         </EnterText>
       </BottomContainer>
+      <TopButton onClick={handleScrollTop}>⬆️</TopButton>
     </>
   )
 }
