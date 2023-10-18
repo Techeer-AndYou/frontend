@@ -232,8 +232,12 @@ export default function MainPage() {
       <Header>
         <Logo>Remember Plus</Logo>
         <Menu>
-          <MenuItem>Blog</MenuItem>
-          <MenuItem>마이페이지</MenuItem>
+          <MenuItem>
+            <Link href={`https://time-map-installer.tistory.com/`}>Blog</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href='/mypage'>마이페이지</Link>
+          </MenuItem>
           <MenuItem>로그아웃</MenuItem>
         </Menu>
       </Header>
