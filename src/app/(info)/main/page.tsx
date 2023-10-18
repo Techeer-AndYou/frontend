@@ -35,6 +35,31 @@ const FindFriendsContainer = styled.div<ContainerProps>`
   transition: opacity 1.2s; // 1.2초 동안 fade in 효과
 }`
 
+const NextButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  gap: 4px;
+
+  width: 118px;
+  height: 66px;
+  background: #080e42;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  border: none; // 기본 버튼 스타일 제거
+
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 58px;
+  color: #a3d2cd;
+
+  cursor: pointer;
+`
+
 const BottomContainer = styled.div`
   display: flex;
   align-items: center;
@@ -91,6 +116,13 @@ const EnterText = styled.div`
     color: blue;
   }
 `
+const handleScrollDown = () => {
+  // 현재 스크롤 위치를 가져와서 100vh만큼 더한 위치로 스크롤
+  window.scrollTo({
+    top: window.scrollY + window.innerHeight, // 현재 위치에 100vh를 더한 값
+    behavior: 'smooth', // 부드럽게 스크롤
+  })
+}
 
 export default function MainPage() {
   const [rotationDegree, setRotationDegree] = useState(0)
@@ -125,6 +157,7 @@ export default function MainPage() {
           <Image src='/images/find_friends2.png' alt='친구찾기 카드' width={187} height={187} />
           <p>친구 찾기</p>
         </FindFriendsContainer>
+        <NextButton onClick={handleScrollDown}>Next</NextButton>
       </TopContainer>
       <BottomContainer>
         <Link href='/relation'>
