@@ -1,6 +1,5 @@
 'use client'
 
-import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -20,15 +19,26 @@ const BottomContainer = styled.div`
   height: 100vh;
   width: 100vw;
   background: linear-gradient(to bottom, white, black);
+  position: relative;
+`
+
+const EnterText = styled.div`
+  margin-left: 20px; // 간격 조정. 필요에 따라 값을 조정하세요.
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
 `
 
 export default function MainPage() {
   const [rotationDegree, setRotationDegree] = useState(0)
+  const [scrollY, setScrollY] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY || window.pageYOffset
-      setRotationDegree(-Math.min(scrollY / 10, 22))
+      const currentScrollY = window.scrollY || window.pageYOffset
+      setRotationDegree(-Math.min(currentScrollY / 10, 22))
+      setScrollY(currentScrollY) // 추가
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -51,6 +61,12 @@ export default function MainPage() {
           height={541}
           style={{ transform: `rotate(${rotationDegree}deg)`, transition: 'transform 0.5s' }}
         />
+        <EnterText>
+          <p>See</p>
+          <p>Your</p>
+          <p>Relations</p>
+          <p>Click to Enter</p>
+        </EnterText>
       </BottomContainer>
     </>
   )
