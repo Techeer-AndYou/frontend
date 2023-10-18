@@ -198,7 +198,13 @@ export default function MainPage() {
       <TopContainer isLoaded={isPageLoaded}>
         <Image src='/images/find_friends.png' alt='친구찾기 카드' width={383} height={258} />
         <FindFriendsContainer isLoaded={isPageLoaded}>
-          <Image src='/images/find_friends2.png' alt='친구찾기 카드' width={187} height={187} />
+          <Image
+            src='/images/find_friends2.png'
+            alt='친구찾기 카드'
+            width={187}
+            height={187}
+            priority={true}
+          />
           <p>친구 찾기</p>
         </FindFriendsContainer>
         <NextButton onClick={handleScrollDown}>Next</NextButton>
@@ -222,7 +228,9 @@ export default function MainPage() {
           </p>
         </EnterText>
       </BottomContainer>
-      <TopButton onClick={handleScrollTop}>⬆️</TopButton>
+      <TopButton onClick={handleScrollTop} style={{ display: scrollY > 0 ? 'flex' : 'none' }}>
+        ⬆️
+      </TopButton>
     </>
   )
 }
