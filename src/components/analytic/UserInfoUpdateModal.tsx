@@ -1,102 +1,79 @@
 'use client'
 import styled from '@emotion/styled'
-import axios from "axios";
+
 import React from "react";
-import { FiUpload } from "react-icons/fi";
-import { FaCamera } from "react-icons/fa";
-import { domain } from "../../domain/domain";
 import CloseIcon from '../common/CloseIcon';
 
-type CardPhotoUpdateModalPropsType = {
-  onSaveChanges: (data: { photo_url: string }) => void;
+type UserInfoUpdateModalPropsType = {
+  onSaveChanges: (data: { user_name: string; user_email: string; password: string }) => void;
 };
 
-const CardPhotoUpdateModal: React.FC<CardPhotoUpdateModalPropsType> = ({ onSaveChanges }) => {
+
+const UserInfoUpdateModal: React.FC<UserInfoUpdateModalPropsType> = ({ onSaveChanges }) => {
   const [showModal, setShowModal] = React.useState(false);
-  const [selectedPhoto, setSelectedPhoto] = React.useState<File | null>(null); // New state for the selected photo file
-  const user_uuid = localStorage.getItem("user_uuid");
+  const [user_name, setName] = React.useState("");
+  const [user_email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const handleSaveChanges = () => {
-    if (selectedPhoto) {
-      let formData = new FormData();
-      formData.append("card_photo", selectedPhoto); // "photo"에서 "user_photo"로 변경
-
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      };
-
-      // Using axios API to send the form data to the server
-      axios
-        .put(`${domain}:8000/api/v1/cards/photo/${user_uuid}/`, formData, config)
-        .then((response) => {
-          onSaveChanges({ photo_url: response.data.photo_url }); // "user_photo"에서 "photo_url"로 변경
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    // Add your logic here to save the changes (e.g., send data to the server)
+    onSaveChanges({ user_name, user_email, password });
     setShowModal(false);
   };
+
   const handleEditProfile = () => {
+    // Add your logic here to handle the "Edit Profile" button click
     setShowModal(true);
   };
-  // Function to handle the photo file selection
-  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    setSelectedPhoto(file);
-    // Optional: You can also show a preview of the selected photo
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        // Set the image preview URL
-        const result = reader.result as string | null;
-        setSelectedPhotoPreview(result); // Explicitly cast to string | null
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const [selectedPhotoPreview, setSelectedPhotoPreview] = React.useState<string | null>(null);
 
   return (
     <>
-      <PhotoEditButton onClick={handleEditProfile}> 
-        <FaCamera size={45} color={"white"} />
-      </PhotoEditButton>
+      <EditProfileButton
+        type="button"
+        onClick={handleEditProfile}
+      >
+        프로필 변경
+      </EditProfileButton>
+
       {showModal ? (
         <>
           <MainContainer>
             <div>
               <ModalContainer>
                 <ModalHeader>
-                  <div>명함 사진</div>
+                  <div>프로필 변경</div>
                   <button onClick={() => setShowModal(false)}><CloseIcon /></button>
                 </ModalHeader>
                 <ModalBody>
-                  <div className="upload-button-container">
-                    <label htmlFor="photo">
-                      <FiUpload className="file-upload-icon" />
-                      사진 업로드
-                    </label>
+                  <div>
+                    <label htmlFor="name">이름</label>
                     <input
-                      id="photo"
-                      type="file"
-                      accept="image/*" // Only allow image files to be selected
-                      onChange={handlePhotoChange}
+                      id="name"
+                      type="text"
+                      value={user_name}
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </div>
-                  {selectedPhotoPreview && (
-                    <div className="upload-img-container">
-                      <img
-                        src={selectedPhotoPreview}
-                        alt="Selected Preview"
-                      />
-                    </div>
-                  )}
+                  <div>
+                    <label htmlFor="email">이메일</label>
+                    <input
+                      id="email"
+                      type="email"
+                      value={user_email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-2">
+                    <label htmlFor="password">비밀번호</label>
+                    <input
+                      id="password"
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
                 </ModalBody>
-                <ModalFooter>
+                <ModalFooter >
                   <button
                     type="button"
                     onClick={handleSaveChanges}
@@ -114,25 +91,30 @@ const CardPhotoUpdateModal: React.FC<CardPhotoUpdateModalPropsType> = ({ onSaveC
   );
 }
 
-const PhotoEditButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 580px;
-  height: 80px;
-  position: absolute;
-  bottom: 0px;
-  z-index: 10;
-  margin: 1rem;
-  background-color: transparent;
+const EditProfileButton = styled.button`
+  // dark:bg-rememberBlue dark:hover:bg-rememberBlueHover dark:focus:ring-gray-700
+  // hover:bg-rememberBlueHover 
+  margin-top: 2rem;
+  width: 200px;
+  height: 55px;
+  color: white;
+  background-color: RGB(123, 199, 231);
+  font-weight: 500;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  line-height: 1.25rem;
+  padding: 10px 1.25rem;
+  border: none;
+  :hover {
+    background-color: RGB(123, 199, 231);
+    opacity: 0.8;
+  }
   :focus {
     outline: 2px solid transparent;
     outline-offset: 2px;
+    box-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    --tw-ring-color: rgb(209 213 219); //focus:ring-gray-300
   }
-  :hover {
-    cursor: pointer;
-  }
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 `
 
 const MainContainer = styled.div`
@@ -154,6 +136,7 @@ const MainContainer = styled.div`
   & > div {
     position: relative;
     width: 430px;
+    height: 444px;
     margin: 1.5rem auto;
     max-width: 48rem;
   }
@@ -227,63 +210,38 @@ const ModalHeader = styled.div`
 
 const ModalBody = styled.div`
   position: relative;
-  padding: 1rem 2rem;
+  padding: 2rem 2rem;
+  display: flex;
   flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: space-between;
 
-  .upload-button-container {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .upload-img-container {
-    margin-bottom: 2rem;
-  }
   & > div {
-    margin: 1.5rem 0.5rem;
+    margin: 1rem;
 
   & > label {
-    .file-upload-icon {
-      margin-right: 0.5rem;
-    }
-
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: RGB(123, 199, 231);
-    color: white;
-    :active {
-      background-color: RGB(123, 199, 231);
-    }
-    text-transform: uppercase;
+    display: block;
+    color: rgb(55 65 81);
     font-size: 1.6rem;
     line-height: 1.25rem;
-    padding: 0.5rem 130px;
-    border-radius: 0.25rem;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    :hover {
-      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      cursor: pointer;
-    }
-    outline: 2px solid transparent;
-    outline-offset: 2px;
+    margin-bottom: 1rem;
+  }
+
+  & > input {
+    //  focus:shadow-outline
+    appearance: none;
+    border: 1px solid lightgray;
+    border-radius: 0.5rem;
+    width: 100%;
+    height: 40px;
+    padding: 0.5rem 0.75rem;
+    color: rgb(55 65 81);
+    line-height: 1.25;
+    background-color: white;
     :focus {
       outline: 2px solid transparent;
       outline-offset: 2px;
     }
-    margin-right: 0.25rem;
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-  }
-
-  & > input {
-    display: none;
-  }
-
-  & > img {
-    width: 100%;
-    object-fit: contain;
   }
 }
 `
@@ -330,4 +288,4 @@ const ModalBackground = styled.div`
   z-index: 40;
 `
 
-export default CardPhotoUpdateModal;
+export default UserInfoUpdateModal;

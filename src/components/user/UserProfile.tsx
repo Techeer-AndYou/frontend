@@ -65,11 +65,9 @@ const UserProfile: React.FC<UserPropsType> = ({ userData, setUserData }) => {
         />
         <UserPhotoUpdateModal onSaveChanges={handlePhotoSaveChanges} />
       </UserPhotoContainer>
-      <p className="user-name">김예빈</p>
       <UserInfoUpdateContainer>
-        <div className="user-email-container">
-          <p className="user-email">kimyeobin@naver.com</p>
-        </div>
+        <p className="user-name">{userData.user_name}</p>
+        <p className="user-email">{userData.user_email}</p>
         <UserInfoUpdateModal onSaveChanges={handleSaveChanges} />
       </UserInfoUpdateContainer>
     </UserProfileContainer>
@@ -78,26 +76,23 @@ const UserProfile: React.FC<UserPropsType> = ({ userData, setUserData }) => {
 
 const UserProfileContainer = styled.div`
   width: 270px;
+  height: 500px;
   max-width: 32rem;
-  margin-top: 3rem;
   margin-bottom: 40px;
   background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   padding: 3rem;
   box-sizing: border-box;
-
-  .user-name {
-    text-align: center;
-    font-size: 28px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 const UserPhotoContainer = styled.div`
   position: relative;
 
   & > img {
-    width: 170px;
-    height: 170px;
+    width: 200px;
     border-radius: 9999px;
     margin-left: auto;
     margin-right: auto;
@@ -112,10 +107,14 @@ const UserInfoUpdateContainer = styled.div`
   align-items: center;
   width: 100%;
 
-  .user-email-container {
-    margin-bottom: 14px;
+  & > p {
+    margin: 1rem;
   }
 
+  .user-name {
+    text-align: center;
+    font-size: 28px;
+  }
   .user-email {
     font-size: 14px;
     color: rgb(107 114 128);
