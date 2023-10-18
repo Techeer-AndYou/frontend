@@ -1,5 +1,6 @@
 'use client'
 
+import Header from '@/components/global/Header'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -8,40 +9,6 @@ import { useEffect, useState } from 'react'
 type ContainerProps = {
   isLoaded: boolean
 }
-
-const Header = styled.header`
-  position: fixed; // 고정 포지션으로 변경
-  width: 100vw; // 뷰포트 너비만큼 가로 길이 설정
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  height: 60px;
-  background-color: #fff;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
-`
-
-const Logo = styled.div`
-  font-weight: bold;
-  font-size: 20px;
-  color: black;
-`
-
-const Menu = styled.ul`
-  display: flex;
-  gap: 15px; // 메뉴 아이템들 사이의 간격
-  list-style: none; // 기본 리스트 스타일 제거
-`
-
-const MenuItem = styled.li`
-  font-size: 16px;
-  color: black;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline; // 마우스를 올렸을 때 밑줄이 생기도록 설정
-  }
-`
 
 const TopContainer = styled.div<ContainerProps>`
   display: flex;
@@ -229,18 +196,7 @@ export default function MainPage() {
 
   return (
     <>
-      <Header>
-        <Logo>Remember Plus</Logo>
-        <Menu>
-          <MenuItem>
-            <Link href={`https://time-map-installer.tistory.com/`}>Blog</Link>
-          </MenuItem>
-          <MenuItem>
-            <Link href='/mypage'>마이페이지</Link>
-          </MenuItem>
-          <MenuItem>로그아웃</MenuItem>
-        </Menu>
-      </Header>
+      <Header />
       <TopContainer isLoaded={isPageLoaded}>
         <Image src='/images/find_friends.png' alt='친구찾기 카드' width={383} height={258} />
         <FindFriendsContainer isLoaded={isPageLoaded}>
