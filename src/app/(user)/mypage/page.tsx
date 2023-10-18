@@ -3,12 +3,30 @@ import styled from '@emotion/styled'
 
 import React, { useEffect, useState } from "react";
 import CardInfo from "../../../components/card/CardInfo";
-import LineChart from "../../../components/analytic/LineChart";
-import PieChart from "../../../components/analytic/PieChart";
 import UserProfile from "../../../components/user/UserProfile";
-import BarChart from "../../../components/analytic/BarChart";
 import axios from "axios";
 import { domain } from "../../../domain/domain";
+import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+const LineChart = dynamic(
+  () => import('../../../components/analytic/LineChart'),
+  {
+    loading: () => <div className='line-chart-skeleton'></div>
+  },
+);
+const PieChart = dynamic(
+  () => import('../../../components/analytic/PieChart'),
+  {
+    loading: () => <div className='pie-chart-skeleton'></div>
+  }
+);
+const BarChart = dynamic(
+  () => import('../../../components/analytic/BarChart'),
+  {
+    loading: () => <div className='bar-chart-skeleton'></div>
+  }
+);
 
 export type UserType = {
   user_name: string;
@@ -52,9 +70,11 @@ export default function userPage() {
   });
 
   useEffect(() => {
-    const user_uuid = localStorage.getItem("user_uuid");
+    //const user_uuid = localStorage.getItem("user_uuid");
+    const user_uuid = 'abcd'; // api mocking test
+
     axios
-      .get(`${domain}:8000/api/v1/users/info/${user_uuid}/`)
+      .get(`${domain}:3000/api/v1/users/info/${user_uuid}/`)
       .then((response) => {
         // 로그인 성공 시 처리
         const userData: { result: UserType } = response.data;
@@ -67,7 +87,7 @@ export default function userPage() {
       });
 
     axios
-      .get(`${domain}:8000/api/v1/cards/info/${user_uuid}/`)
+      .get(`${domain}:3000/api/v1/cards/info/${user_uuid}/`)
       .then((response) => {
         // 로그인 성공 시 처리
         const cardData: { result: CardType } = response.data;
@@ -84,8 +104,7 @@ export default function userPage() {
     setShowCardInfo(component === "cardInfo");
     setShowChart(component === "chart");
   };
-  console.log(showCardInfo)
-  console.log(cardData)
+  
   return (
     <BaseContainer>
       <LeftContainer>
@@ -114,40 +133,44 @@ export default function userPage() {
             introduction={cardData.card_intro}
             photo={cardData.card_photo}
           />
-          <a href="https://youtu.be/su8KH8jT7e0" target="_blank" rel="noopener noreferrer">
-            <img
-              src="https://github.com/SV-Summer-BootCamp-Team-F/frontend/blob/design/update-design-relation-page-69/src/pages/User/final_ad.png?raw=true"
+          <div className="advertising-container">
+            <a href="https://youtu.be/su8KH8jT7e0" target="_blank" rel="noopener noreferrer">
+            <Image
+              src="/images/final_ad.png"
               alt="ad"
+              width={230}
+              height={600}
             />
           </a>
+          </div>
         </CardInfoContainer>
       )}
       {showChart && (
         <ChartContainer>
           <CenterContainer>
             <div className='count-info-container'>
-              <CountInfo bgColor='rgb(255,255,255)/50' titleColor='rgb(75 85 99)'>
+              <CountInfo bgColor='RGB(249, 249, 249)' titleColor='rgb(75 85 99)'>
                 <div className="count-title">오늘 나를 조회한<br />사용자</div>
                 <div className="count-container">
                   <div className="count-num">20</div>
                   <div className="count-unit">명</div>
                 </div>
               </CountInfo>
-              <CountInfo bgColor='rgb(147 197 253)/50' titleColor='black'>
-                <div className="count-title">지금까지 내 명함을 본 사용자</div>
+              <CountInfo bgColor='RGB(195, 220, 249)' titleColor='black'>
+                <div className="count-title">지금까지 내 명함을 본<br />사용자</div>
                 <div className="count-container">
                   <div className="count-num">127</div>
                   <div className="count-unit">명</div>
                 </div>
               </CountInfo>
-              <CountInfo bgColor='rgb(255,255,255)/50' titleColor='rgb(75 85 99)'>
+              <CountInfo bgColor='RGB(249, 249, 249)' titleColor='rgb(75 85 99)'>
                 <div className="count-title">오늘 추가한 명함</div>
                 <div className="count-container">
                   <div className="count-num">7</div>
                   <div className="count-unit">개</div>
                 </div>
               </CountInfo>
-              <CountInfo bgColor='rgb(147 197 253)/50' titleColor='black'>
+              <CountInfo bgColor='RGB(195, 220, 249)' titleColor='black'>
                 <div className="count-title">지금까지 추가한 명함</div>
                 <div className="count-container">
                   <div className="count-num">104</div>
@@ -169,15 +192,21 @@ export default function userPage() {
 
 const BaseContainer = styled.div`
   display: flex;
+  justify-content: center;
   font-family: 'GmarketSansMedium';
   width: 100vw;
   height: 100vh;
-  background-color: lightgray;
+  background-color: rgb(242, 242, 242);
 `
 
 const LeftContainer = styled.div`
-  margin-left: 3rem;
+  //margin-left: 3rem;
   margin-right: 3rem;
+  margin-top: 3rem;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `
 
 const ButtonContainer = styled.div`
@@ -187,25 +216,22 @@ const ButtonContainer = styled.div`
   width: 270px;
 
   & > button {
-    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.05)); 
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
     width: 130px;
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 13px;
+    font-size: 1.6rem;
     color: black;
     :hover {
       color: white;
       background-color: RGB(123, 199, 231);
+      cursor: pointer;
+      border: none;
     }
-    border: 1px solid RGB(238, 238, 238);
-    :focus {
-      box-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-      outline-width: 0px;
-      --tw-ring-color: rgb(147 197 253);
-    }
-    font-size: medium;
+    border: 1px solid rgb(224, 224, 224);
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;
     //dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-rememberBlue dark:focus:ring-rememberBlueActive
@@ -216,14 +242,12 @@ const CardInfoContainer = styled.div`
   display: flex;
   margin-top: 3rem;
 
-  & > a {
-    & > img {
-      margin-left: 3rem;
-      width: 230px;
-      height: 603px;
-      border-radius: 0.75rem;
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    }
+  .advertising-container {
+    margin-left: 3rem;
+    width: 230px;
+    height: 603px;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   }
 `
 
@@ -231,6 +255,27 @@ const ChartContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 3rem;
+
+  .line-chart-skeleton {
+    width: 660px;
+    height: 430px;
+    background-color: rgb(222, 222, 222);
+    border-radius: 0.5rem;
+  }
+
+  .pie-chart-skeleton {
+    width: 350px;
+    height: 330px;
+    background-color: rgb(222, 222, 222);
+    border-radius: 0.5rem;
+  }
+
+  .bar-chart-skeleton {
+    width: 350px;
+    height: 250px;
+    background-color: rgb(222, 222, 222);
+    border-radius: 0.5rem;
+  }
 `
 const CenterContainer = styled.div`
   display: flex;

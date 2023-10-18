@@ -14,8 +14,8 @@ const CloseIcon = () => (
 );
 
 const CloseIconSVG = styled.svg`
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 2.4rem;
+  width: 2.4rem;
 `
 
 export default CloseIcon;

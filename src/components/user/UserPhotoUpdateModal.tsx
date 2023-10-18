@@ -64,7 +64,7 @@ const UserPhotoUpdateModal: React.FC<UserPhotoUpdateModalProps> = ({ onSaveChang
       <PhotoEditButton
         onClick={handleEditProfile}
       >
-        <FaCamera size={18} color={"white"} />
+        <FaCamera size={20} color={"white"} />
       </PhotoEditButton>
       {showModal ? (
         <>
@@ -121,11 +121,17 @@ const PhotoEditButton = styled.button`
   padding: 0.5rem;
   bottom: 0.625rem;
   right: 0.5rem;
-  background-color: rgb(0 0 0)/50;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(66, 66, 66, 0.358);
+  border: none;
   border-radius: 9999px;
   :focus {
     outline: 2px solid transparent;
     outline-offset: 2px;
+  }
+  :hover {
+    cursor: pointer;
   }
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 `
@@ -175,9 +181,9 @@ const ModalContainer = styled.div`
 
 const ModalHeader = styled.div`
   width: 100%;
-  height: 3.5rem;
+  height: 56px;
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgb(226, 232, 240);
   border-top-left-radius: 0.25rem;
@@ -185,7 +191,6 @@ const ModalHeader = styled.div`
 
   & > div {
     font-size: 20px;
-    font-weight: 600;
     display: flex;
     align-items: center;
     width: 100%;
@@ -197,6 +202,7 @@ const ModalHeader = styled.div`
     //  leading-none  transition-colors duration-300 
     padding: 0.75rem;
     margin-left: auto;
+    margin-right: 0.5rem;
     background-color: transparent;
     border: 0px;
     color: black;
@@ -213,8 +219,8 @@ const ModalHeader = styled.div`
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms; 
     :hover {
-      color: white;
-      background-color: rgb(127 29 29);
+      color: RGB(123, 199, 231);
+      cursor: pointer;
     }
     border-radius: 9999px;
   }
@@ -225,7 +231,7 @@ const ModalBody = styled.div`
   padding: 1rem 2rem;
   flex: 1 1 auto;
 
-  .upload-button-containe {
+  .upload-button-container {
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
@@ -234,31 +240,31 @@ const ModalBody = styled.div`
     margin-bottom: 2rem;
   }
   & > div {
-    margin-bottom: 1rem;
+    margin: 1.5rem 0.5rem;
 
   & > label {
     .file-upload-icon {
       margin-right: 0.5rem;
     }
 
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: RGB(123, 199, 231);
-    cursor: pointer;
     color: white;
     :active {
       background-color: RGB(123, 199, 231);
     }
-    font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.875rem;
+    font-size: 1.6rem;
     line-height: 1.25rem;
     padding: 0.5rem 130px;
     border-radius: 0.25rem;
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
     :hover {
       box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      cursor: pointer;
     }
     outline: 2px solid transparent;
     outline-offset: 2px;
@@ -291,33 +297,29 @@ const ModalFooter = styled.div`
   border-top: 1px solid rgb(226, 232, 240);
   border-bottom-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
+  height: 76px;
 
   & > button {
-    background-color: RGB(123, 199, 231);
+    width: 120px;
+    height: 40px;
     color: white;
-    :active {
-      background-color: RGB(123, 199, 231);
-    }
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
+    background-color: RGB(123, 199, 231);
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
     line-height: 1.25rem;
-    border-radius: 0.25rem;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    padding: 10px 1.25rem;
+    border: none;
     :hover {
-      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      background-color: RGB(123, 199, 231);
+      opacity: 0.8;
+      cursor: pointer;
     }
-    outline: 2px solid transparent;
-    outline-offset: 2px;
     :focus {
       outline: 2px solid transparent;
       outline-offset: 2px;
+      box-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+      --tw-ring-color: rgb(209 213 219); //focus:ring-gray-300
     }
-    margin-right: 0.25rem;
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
   }
 `
 
