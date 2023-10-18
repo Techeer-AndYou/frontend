@@ -43,6 +43,11 @@ const NextButton = styled.button`
   padding: 4px;
   gap: 4px;
 
+  position: absolute; // 절대적인 위치 지정
+  bottom: calc(0vh + 48px); // 100vh에서 버튼 높이를 뺀 위치에 고정
+  left: 50%; // 페이지 가운데에 위치
+  transform: translateX(-50%); // 정확한 중앙에 배치하기 위한 위치 보정
+
   width: 118px;
   height: 66px;
   background: #080e42;
