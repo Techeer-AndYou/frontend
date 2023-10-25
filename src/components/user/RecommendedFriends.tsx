@@ -52,19 +52,59 @@ const RecommendedFriendsContainer = styled.div<ContainerProps>`
   animation:
     riseUp 2s ease forwards,
     float 3s ease-in-out 2s infinite;
+
+  cursor: pointer;
 `
 
 const RecommendedFriends = () => {
   const [position, setPosition] = useState({ top: 50, left: 50 })
+  const [isDragging, setIsDragging] = useState(false)
+  const [startPos, setStartPos] = useState({ x: 0, y: 0 })
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true)
+    setStartPos({ x: e.clientX, y: e.clientY })
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return
+
+    const dx = e.clientX - startPos.x
+    const dy = e.clientY - startPos.y
+
+    setPosition({
+      top: position.top + (dy * 100) / window.innerHeight, // Convert pixel movement to percentage
+      left: position.left + (dx * 100) / window.innerWidth, // Convert pixel movement to percentage
+    })
+
+    setStartPos({ x: e.clientX, y: e.clientY }) // Reset start position for next movement
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      setIsDragging(false)
+    }
+  }
 
   useEffect(() => {
-    const randomTop = Math.random() * 40 + 30 // 30% ~ 70% 사이의 값
-    const randomLeft = Math.random() * 40 + 30 // 30% ~ 70% 사이의 값
-
+    const randomTop = Math.random() * 80 + 10
+    const randomLeft = Math.random() * 80 + 10
     setPosition({ top: randomTop, left: randomLeft })
   }, [])
+
   return (
-    <RecommendedFriendsContainer top={position.top} left={position.left}>
+    <RecommendedFriendsContainer
+      top={position.top}
+      left={position.left}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave} // 여기에 추가했습니다.
+    >
       추천친구
     </RecommendedFriendsContainer>
   )
