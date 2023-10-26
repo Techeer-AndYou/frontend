@@ -5,6 +5,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import logo from 'src/assets/logo.png'
 
+import { css } from '@emotion/react'
+
+import React, { useState } from 'react'
+import { domain } from '../../../domain/domain'
+
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
+
 type ParagraphPropsType = {
   hoverColor: string
 }
@@ -31,9 +39,16 @@ const Paragraph = styled.p<ParagraphPropsType>`
 //팁 이걸쓰면 저위에께 적용이된다!->  ${formContainerStyle};
 //formContainerStyle을 적용합니다.
 
+const Main = styled.div`
+  border-radius: 0 101px 101px 0;
+  background: linear-gradient(221deg, #ff4996 19.54%, #ffca7b 92.43%);
+`
+
 // 스타일을 적용할 컴포넌트를 정의합니다.
+
 const FormContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-left: 0rem;
@@ -41,8 +56,8 @@ const FormContainer = styled.div`
 `
 
 const LoginContainerStyle = styled.div`
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  // background-color: #fff;
+  // box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   padding: 7rem;
   width: 39rem;
   border-radius: 1rem;
@@ -61,12 +76,12 @@ const LoginContainerStyle = styled.div`
 //   z-index: 0;
 // `;
 
-const RememberStyle = styled.h2`
+const RememberStyle = styled.div`
   position: relative;
   text-align: center;
   font-weight: bold;
 
-  margin-bottom: 1rem;
+  margin-bottom: 7rem;
   background: linear-gradient(97deg, #ff00e5 21.55%, #e94646 74.82%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -105,21 +120,26 @@ const FormStyle = styled.form`
 `
 
 const Form_Group = styled.div`
-  margin-bottom: 0.4rem;
+  margin-bottom: 2rem;
   text-align: left;
 
   .label {
-    display: block;
-    margin-bottom: 0.3rem;
+    color: #a5a5a5;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
 
   .loginInput {
     margin-left: 0px;
     padding: 0.8rem;
     border: none;
-    border-radius: 0.4rem;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
     width: 25rem;
+    background: #fff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
   }
 `
 
@@ -143,9 +163,33 @@ const SignUpLink = styled(Link)`
 `
 
 export default function loginPage() {
+  const router = useRouter()
+  const [user_email, setEmail] = useState('')
+  const [isEmailPass, setEmailPass] = useState(false)
+  const [password, setPassword] = useState('')
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    axios
+
+      .post(`/api/v1/users/login/`, { user_email, password })
+      .then((response) => {
+        console.log('로그인 성공!', response.data)
+        localStorage.setItem('user_uuid', response.data.result.user_uid)
+        alert('환영합니다!')
+
+        router.push('/mypage')
+      })
+      .catch((error) => {
+        console.error('로그인 실패', error)
+        alert('이메일과 비밀번호를 다시 확인해주세요')
+      })
+  }
   return (
     <div>
-      {/* <Paragraph hoverColor='red'>로그인 페이지 입니다</Paragraph> */}
+      {/* {<Paragraph hoverColor='red'>로그인 페이지 입니다</Paragraph>} */}
+
       <FormContainer>
         <LoginContainerStyle>
           {/*잠시 반응형이슈 <Logo src={logo} alt="로고 이미지" /> */}
@@ -153,27 +197,28 @@ export default function loginPage() {
             <h2>Remember</h2>
             <span className='plus'>plus+</span>
           </RememberStyle>
-          <LoginStyle>
-            <h1>로그인</h1>
-          </LoginStyle>
-          <FormStyle /*onSubmit={handleSubmit}*/>
+          {/* <LoginStyle>로그인</LoginStyle> */}
+          <FormStyle onSubmit={handleSubmit}>
             <Form_Group>
-              <label className='label'>Email</label>
+              <label className='label'></label>
               <input
                 type='email'
+                placeholder='email'
                 className='loginInput'
-                /*value={user_email}
-              onChange={(event) => setEmail(event.target.value)}*/
+                value={user_email}
+                onChange={(event) => setEmail(event.target.value)}
               ></input>
+              <p>{!isEmailPass}유효성 검사</p>
             </Form_Group>
 
             <Form_Group>
-              <label className='label'>비밀번호</label>
+              <label className='label'></label>
               <input
                 type='password'
+                placeholder='비밀번호'
                 className='loginInput'
-                /*value={password}
-              onChange={(event) => setEmail(event.target.value)}*/
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
               ></input>
             </Form_Group>
             <button type='submit' className='loginButton'>

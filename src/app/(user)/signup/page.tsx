@@ -6,6 +6,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import logo from 'src/assets/logo.png'
 
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
+
 const FormContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -83,15 +86,43 @@ const SignUpLink = styled(Link)`
     border-radius: 0.8rem;
     // box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     background-color: skyblue;
-    color: border-radius: 10px;
-    background: linear-gradient(90deg, #F47EFE 28.51%, rgba(255, 74, 139, 0.00) 96.56%);;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #f47efe 28.51%, rgba(255, 74, 139, 0) 96.56%);
     width: 25rem;
     cursor: pointer;
-    font-weight: 450;        
+    font-weight: 450;
   }
 `
 
 export default function signupPage() {
+  const router = useRouter()
+  const [user_email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [user_name, setName] = useState('')
+  const [user_phone, setPhone] = useState('')
+
+  const SignupAPI = `http:8000/api/v1/users/register/`
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    try {
+      const response = await axios.post(SignupAPI, {
+        user_email,
+        password,
+        user_name,
+        user_phone,
+      })
+
+      console.log('회원가입 성공!', response.data)
+      alert('회원가입 성공!')
+      router.push('/login')
+    } catch (error: any) {
+      console.error('회원가입 실패!', error.message)
+      alert('회원가입에 실패하였습니다')
+    }
+  }
+
   return (
     <div>
       <FormContainer>
@@ -102,13 +133,14 @@ export default function signupPage() {
           </RememberStyle>
           <SignUpTitle>회원가입</SignUpTitle>
 
-          <FormStyle /*onSubmit={handleSubmit}*/>
+          <FormStyle onSubmit={handleSubmit}>
             <Form_Group>
               <label className='label'>이름</label>
               <input
                 type='text'
-                className='signupInput' /* value={user_name}
-              onChange={(event) => setEmail(event.target.value)}*/
+                className='signupInput'
+                value={user_name}
+                onChange={(event) => setName(event.target.value)}
               ></input>
             </Form_Group>
 
@@ -116,8 +148,9 @@ export default function signupPage() {
               <label className='label'>Email</label>
               <input
                 type='email'
-                className='signupInput' /*value={user_email}
-              onChange={(event) => setEmail(event.target.value)}*/
+                className='signupInput'
+                value={user_email}
+                onChange={(event) => setEmail(event.target.value)}
               ></input>
             </Form_Group>
 
@@ -125,8 +158,9 @@ export default function signupPage() {
               <label className='label'>비밀번호</label>
               <input
                 type='password'
-                className='signupInput' /*value={password}
-              onChange={(event) => setEmail(event.target.value)}*/
+                className='signupInput'
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
               ></input>
             </Form_Group>
 
@@ -134,8 +168,9 @@ export default function signupPage() {
               <label className='label'>Phone</label>
               <input
                 type='tel'
-                className='signupInput' /* value={user_phone}
-              onChange={(event) => setPhone(event.target.value)}}*/
+                className='signupInput'
+                value={user_phone}
+                onChange={(event) => setPhone(event.target.value)}
               ></input>
             </Form_Group>
           </FormStyle>
