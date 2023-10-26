@@ -27,6 +27,19 @@ const floatingAnimation = `
   }
 `
 
+type DropZoneProps = {
+  side: 'left' | 'right'
+}
+
+const DropZone = styled.div<DropZoneProps>`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 15%;
+  ${(props) => (props.side === 'left' ? 'left' : 'right')}: 0;
+  z-index: -1;
+`
+
 type ContainerProps = {
   top: number
   left: number
@@ -37,8 +50,8 @@ const RecommendedFriendsContainer = styled.div<ContainerProps>`
   ${floatingAnimation}
 
   position: fixed;
-  top: ${(props) => props.top}%; // 랜덤한 top 값을 받아옴
-  left: ${(props) => props.left}%; // 랜덤한 left 값을 받아옴
+  top: ${(props) => props.top}%;
+  left: ${(props) => props.left}%;
   transform: translate(-50%, -50%);
   width: 10vw;
   height: 7vw;
@@ -60,28 +73,34 @@ const RecommendedFriends = () => {
   const [position, setPosition] = useState({ top: 50, left: 50 })
   const [isDragging, setIsDragging] = useState(false)
   const [startPos, setStartPos] = useState({ x: 0, y: 0 })
+  const [isVisible, setIsVisible] = useState(true)
 
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true)
     setStartPos({ x: e.clientX, y: e.clientY })
   }
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = (e: MouseEvent) => {
     if (!isDragging) return
 
     const dx = e.clientX - startPos.x
     const dy = e.clientY - startPos.y
 
     setPosition({
-      top: position.top + (dy * 100) / window.innerHeight, // Convert pixel movement to percentage
-      left: position.left + (dx * 100) / window.innerWidth, // Convert pixel movement to percentage
+      top: position.top + (dy * 100) / window.innerHeight,
+      left: position.left + (dx * 100) / window.innerWidth,
     })
 
-    setStartPos({ x: e.clientX, y: e.clientY }) // Reset start position for next movement
+    setStartPos({ x: e.clientX, y: e.clientY })
   }
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (e: MouseEvent) => {
     setIsDragging(false)
+
+    // 드롭 영역의 x 좌표가 문서의 15% 또는 85% 보다 작거나 큰 경우만 처리
+    if (e.clientX < window.innerWidth * 0.15 || e.clientX > window.innerWidth * 0.85) {
+      setIsVisible(false)
+    }
   }
 
   const handleMouseLeave = () => {
@@ -91,22 +110,32 @@ const RecommendedFriends = () => {
   }
 
   useEffect(() => {
-    const randomTop = Math.random() * 80 + 10
-    const randomLeft = Math.random() * 80 + 10
-    setPosition({ top: randomTop, left: randomLeft })
-  }, [])
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseup', handleMouseUp)
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+    }
+  }, [isDragging, position])
 
   return (
-    <RecommendedFriendsContainer
-      top={position.top}
-      left={position.left}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave} // 여기에 추가했습니다.
-    >
-      추천친구
-    </RecommendedFriendsContainer>
+    <>
+      <DropZone side='left' />
+      <DropZone side='right' />
+
+      {isVisible && (
+        <RecommendedFriendsContainer
+          top={position.top}
+          left={position.left}
+          onMouseDown={handleMouseDown}
+          // onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+        >
+          추천친구
+        </RecommendedFriendsContainer>
+      )}
+    </>
   )
 }
 

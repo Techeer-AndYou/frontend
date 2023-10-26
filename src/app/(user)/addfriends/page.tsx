@@ -26,8 +26,26 @@ const Container = styled.div`
 `
 
 const Content = styled.div`
+  display: flex;
+  align-items: flex-end;
+  width: 100vw;
+  height: 100vh;
+`
+
+const ReccommendArea = styled.div`
   z-index: 1;
-  // 여기에 필요한 스타일을 추가하세요.
+  flex: 2;
+`
+
+const LeftRightArea = styled.div`
+  flex: 0.15; // 왼쪽과 오른쪽 영역을 각각 15%로 설정합니다.
+  border: solid white; // 테두리를 추가합니다.
+  height: 90%;
+`
+
+const MainArea = styled.div`
+  flex: 0.7; // 중앙 영역을 70%로 설정합니다. (100% - (15% * 2) = 70%)
+  height: 90%;
 `
 
 export default function AddFriendsPage() {
@@ -35,11 +53,18 @@ export default function AddFriendsPage() {
     <>
       <Header textColor='white' plusColor='skyblue' />
       <Container>
-        <Content></Content>
-        <RecommendedFriends />
-        <RecommendedFriends />
-        <RecommendedFriends />
-        <RecommendedFriends />
+        <Content>
+          <LeftRightArea></LeftRightArea>
+          <MainArea>
+            <ReccommendArea>
+              <RecommendedFriends />
+              <RecommendedFriends />
+              <RecommendedFriends />
+              <RecommendedFriends />
+            </ReccommendArea>
+          </MainArea>
+          <LeftRightArea></LeftRightArea>
+        </Content>
       </Container>
     </>
   )
