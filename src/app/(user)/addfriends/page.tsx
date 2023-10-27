@@ -3,6 +3,7 @@
 import Header from '@/components/global/Header'
 import RecommendedFriends from '@/components/user/RecommendedFriends'
 import styled from '@emotion/styled'
+import { useState } from 'react'
 
 const Container = styled.div`
   display: flex;
@@ -48,7 +49,31 @@ const MainArea = styled.div`
   height: 90%;
 `
 
-export default function AddFriendsPage() {
+export type RecommendedFriend = {
+  id: number
+  position: {
+    top: number
+    left: number
+  }
+  isVisible: boolean
+}
+
+const AddFriendsPage = () => {
+  // 추천 친구들의 초기 상태
+  const [friends, setFriends] = useState<RecommendedFriend[]>([
+    { id: 1, position: { top: 20, left: 25 }, isVisible: true },
+    { id: 2, position: { top: 40, left: 20 }, isVisible: true },
+    { id: 3, position: { top: 55, left: 45 }, isVisible: true },
+    { id: 4, position: { top: 64, left: 65 }, isVisible: true },
+  ])
+
+  // 친구의 상태를 업데이트하는 함수
+  const updateFriendState = (friendId: number, data: Partial<RecommendedFriend>) => {
+    setFriends((prevFriends) =>
+      prevFriends.map((friend) => (friend.id === friendId ? { ...friend, ...data } : friend)),
+    )
+  }
+
   return (
     <>
       <Header textColor='white' plusColor='skyblue' />
@@ -57,10 +82,13 @@ export default function AddFriendsPage() {
           <LeftRightArea></LeftRightArea>
           <MainArea>
             <ReccommendArea>
-              <RecommendedFriends />
-              <RecommendedFriends />
-              <RecommendedFriends />
-              <RecommendedFriends />
+              {friends.map((friend) => (
+                <RecommendedFriends
+                  key={friend.id}
+                  initialData={friend} // 초기 상태를 props로 전달
+                  onUpdate={updateFriendState} // 상태 업데이트 함수를 props로 전달
+                />
+              ))}
             </ReccommendArea>
           </MainArea>
           <LeftRightArea></LeftRightArea>
@@ -69,3 +97,5 @@ export default function AddFriendsPage() {
     </>
   )
 }
+
+export default AddFriendsPage

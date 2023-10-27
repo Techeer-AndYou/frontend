@@ -1,3 +1,4 @@
+import { RecommendedFriend } from '@/app/(user)/addfriends/page'
 import styled from '@emotion/styled'
 import { useState, useEffect } from 'react'
 
@@ -68,9 +69,16 @@ const RecommendedFriendsContainer = styled.div<ContainerProps>`
 
   cursor: pointer;
 `
+interface RecommendedFriendsProps {
+  initialData: RecommendedFriend
+  onUpdate: (friendId: number, data: Partial<RecommendedFriend>) => void
+}
 
-const RecommendedFriends = () => {
-  const [position, setPosition] = useState({ top: 50, left: 50 })
+const RecommendedFriends: React.FC<RecommendedFriendsProps> = ({ initialData }) => {
+  const [position, setPosition] = useState({
+    top: initialData.position.top || 50,
+    left: initialData.position.left || 50,
+  })
   const [isDragging, setIsDragging] = useState(false)
   const [startPos, setStartPos] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(true)
