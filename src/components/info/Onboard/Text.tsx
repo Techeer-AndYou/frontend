@@ -12,6 +12,15 @@ const handleScrollToTop = () => {
 }
 
 const Title = styled.h1`
+  font-size: 5.8rem;
+  margin-top: 0.5%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 20%;
+  font-weight: 650;
+  text-align: center;
+  animation: fade-in 1.2s ease-in-out;
+
   span {
     background: linear-gradient(97deg, #ff00e5 21.55%, #e94646 74.82%);
     background-clip: text;
@@ -22,8 +31,8 @@ const Title = styled.h1`
 
 const ClickText = styled.div`
   position: relative;
-  top: 70%;
-  left: 49.7%;
+  top: 75%;
+  left: 50%;
   transform: translate(-50%, -50%);
   color: black;
   font-weight: bold;
@@ -49,7 +58,10 @@ const EnterLink = styled.div`
   top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: black;
+  background: linear-gradient(97deg, #ff00e5 21.55%, #e94646 74.82%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: bolder;
   font-size: 2rem;
   cursor: pointer;
@@ -58,11 +70,11 @@ const EnterLink = styled.div`
 const ScrollTopButton = styled.button`
   position: relative;
   top: 250px;
-  left: 34rem;
+  left: 90rem;
   padding: 1px;
   border-radius: 10%;
-  background-color: rgb(10, 10, 10);
-  color: skyblue;
+  background-color: rgb(255, 255, 255);
+  color: #ffffff;
   font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
@@ -74,17 +86,16 @@ const Text = () => {
       <Title>
         나만의 <span>Universe</span>를 만들어보세요
       </Title>
-      <ClickText>클릭!</ClickText>
+      <ClickText>
+        <Link href='/login'>
+          <EnterLink>Enter</EnterLink>
+        </Link>
+      </ClickText>
       <RememberText>
         Remember <span>plus+</span>
       </RememberText>
-      <Link href='/login'>
-        <h1 style={{ color: 'linear-gradient(97deg, #ff00e5 21.55%, #e94646 74.82%)' }}>
-          시작하기
-        </h1>
-        <EnterLink>Enter</EnterLink>
-      </Link>
-      <ScrollTopButton onClick={handleScrollToTop}>맨 위로</ScrollTopButton>
+
+      <ScrollTopButton onClick={handleScrollToTop}>🔝</ScrollTopButton>
     </div>
   )
 }
