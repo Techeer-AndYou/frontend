@@ -113,7 +113,7 @@ const Charts = () => {
         <IntroLineChart chartData={chartData} />
       </div>
 
-      <Container>
+      {/* <Container>
         <InnerContainer>
           <TextContainer>
             <div>
@@ -126,7 +126,7 @@ const Charts = () => {
             <Button>Close</Button>
           </ButtonsContainer>
         </InnerContainer>
-      </Container>
+      </Container> */}
     </>
   )
 }

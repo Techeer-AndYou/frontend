@@ -62,7 +62,7 @@ const ContentWrapper = styled.div`
     width: 80%;
     color: white;
     font-size: 24px;
-    margin-top: 5px;
+    margin-top: 70px;
   }
 
   button {
@@ -72,7 +72,7 @@ const ContentWrapper = styled.div`
     border-radius: 5px;
     height: 40px;
     width: 240px;
-    margin-top: 4px;
+    margin-top: 70px;
   }
 `
 
