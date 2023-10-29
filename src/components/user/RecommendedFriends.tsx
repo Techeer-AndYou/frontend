@@ -39,6 +39,9 @@ const DropZone = styled.div<DropZoneProps>`
   width: 15%;
   ${(props) => (props.side === 'left' ? 'left' : 'right')}: 0;
   z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 type ContainerProps = {
@@ -129,8 +132,8 @@ const RecommendedFriends: React.FC<RecommendedFriendsProps> = ({ initialData }) 
 
   return (
     <>
-      <DropZone side='left' />
-      <DropZone side='right' />
+      <DropZone side='left'>Drag here to Add Friends</DropZone>
+      <DropZone side='right'>Drag here to Delete Requests</DropZone>
 
       {isVisible && (
         <RecommendedFriendsContainer
