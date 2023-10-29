@@ -87,7 +87,8 @@ const SignUpLink = styled(Link)`
     // box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     background-color: skyblue;
     border-radius: 10px;
-    background: linear-gradient(90deg, #f47efe 28.51%, rgba(255, 74, 139, 0) 96.56%);
+    background: linear-gradient(95deg, #c853ff 39.3%, #ff008a 90.57%);
+    color: white;
     width: 25rem;
     cursor: pointer;
     font-weight: 450;

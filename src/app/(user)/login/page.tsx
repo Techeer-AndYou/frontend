@@ -208,7 +208,7 @@ export default function loginPage() {
                 value={user_email}
                 onChange={(event) => setEmail(event.target.value)}
               ></input>
-              <p>{!isEmailPass}유효성 검사</p>
+              {/* <p>{!isEmailPass}유효성 검사</p> */}
             </Form_Group>
 
             <Form_Group>
