@@ -196,19 +196,24 @@ export default function MainPage() {
 
   return (
     <>
-      <Header />
+      <Header textColor='black' plusColor='blue' />
       <TopContainer isLoaded={isPageLoaded}>
-        <Image src='/images/find_friends.png' alt='친구찾기 카드' width={383} height={258} />
+        <Link href='/addfriends'>
+          <Image src='/images/find_friends.png' alt='친구찾기 카드' width={383} height={258} />
+        </Link>
         <FindFriendsContainer isLoaded={isPageLoaded}>
-          <Image
-            src='/images/find_friends2.png'
-            alt='친구찾기 카드'
-            width={187}
-            height={187}
-            priority={true}
-          />
-          <p>친구 찾기</p>
+          <Link href='/addfriends'>
+            <Image
+              src='/images/find_friends2.png'
+              alt='친구찾기 카드'
+              width={187}
+              height={187}
+              priority={true}
+            />
+            <p>친구 찾기</p>
+          </Link>
         </FindFriendsContainer>
+
         <NextButton onClick={handleScrollDown}>Next</NextButton>
       </TopContainer>
       <BottomContainer>

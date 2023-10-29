@@ -28,7 +28,7 @@ export type UserType = {
   user_photo: string
 }
 
-type CardType = {
+export type CardType = {
   card_name: string
   card_email: string
   card_phone: string
