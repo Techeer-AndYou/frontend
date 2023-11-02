@@ -34,7 +34,7 @@ const MenuItem = styled.li`
   }
 `
 
-const Header = ({ textColor = 'black', plusColor = 'blue' }) => {
+const Header = ({ textColor = 'black', plusColor = 'skyblue' }) => {
   return (
     <HeaderContainer>
       <Logo>
