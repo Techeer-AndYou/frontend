@@ -6,8 +6,8 @@ export async function POST(request: Request) {
   // 실제 데이터베이스 로직 대신 mock 데이터를 사용합니다.
   const mockUsers = [
     {
-      user_email: 'existing@example.com',
-      password: 'password123',
+      user_email: '123@123',
+      password: '123',
       user_uid: 'adadsdasdasd33',
     },
   ]
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     )
   }
 
-  // 유저를 찾았을 경우 로그인 성공 메시지를 반환합니다.
+  // 유저를 찾았을 경우 로그인 성공 메시지를 반환합니다
   return new Response(
     JSON.stringify({
       message: '로그인 성공',

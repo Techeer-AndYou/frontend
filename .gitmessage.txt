@@ -12,7 +12,7 @@
 # fix: 버그 수정
 # docs: 문서 수정
 # test: 테스트 코드, 리팩토링 테스트 코드 추가
-# refact: 코드 리팩토링
+# refact: 코드 리팩토링, 로그인 및 회원가입 모킹 완료
 # style: 코드 formatting, 세미콜론 누락, 코드 자체의 변경이 없는 경우
 # chore: 패키지 매니저 수정, 그 외 기타 수정 ex) .gitignore
 # design: CSS 등 사용자 UI 디자인 변경
