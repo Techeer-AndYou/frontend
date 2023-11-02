@@ -37,10 +37,6 @@ const animations = {
 const LogoContainer = styled.div<LogoProps>`
   ${(props) => animations[props.animationType!] || ''}
 
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   font-weight: 700;
   font-family: 'Times New Roman', Times, serif;
   font-size: 3rem;
@@ -67,7 +63,7 @@ export const Logo: React.FC<LogoProps> = ({
       animationTimingFunction={animationTimingFunction}
     >
       <span style={{ color: rememberColor }}>Remember </span>
-      <span style={{ color: plusColor }}>Plus</span>
+      <span style={{ color: plusColor }}> Plus+</span>
     </LogoContainer>
   )
 }
