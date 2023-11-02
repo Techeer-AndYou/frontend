@@ -196,7 +196,7 @@ export default function MainPage() {
 
   return (
     <>
-      <Header textColor='black' plusColor='blue' />
+      <Header rememberColor='black' plusColor='blue' />
       <TopContainer isLoaded={isPageLoaded}>
         <Link href='/addfriends'>
           <Image src='/images/find_friends.png' alt='친구찾기 카드' width={383} height={258} />

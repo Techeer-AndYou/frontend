@@ -73,7 +73,7 @@ const AddFriendsPage = () => {
 
   return (
     <>
-      <Header textColor='white' plusColor='skyblue' />
+      <Header rememberColor='white' plusColor='skyblue' />
       <Container>
         <Content>
           <LeftRightArea></LeftRightArea>
