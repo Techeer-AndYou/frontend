@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { animations } from '@/utils/animations'
+import Link from 'next/link'
 
 interface LogoProps {
   rememberColor?: string
@@ -37,8 +38,10 @@ export const Logo: React.FC<LogoProps> = ({
       animationDuration={animationDuration}
       animationTimingFunction={animationTimingFunction}
     >
-      <span style={{ color: rememberColor }}>Remember </span>
-      <span style={{ color: plusColor }}> Plus+</span>
+      <Link href='/main'>
+        <span style={{ color: rememberColor }}>Remember </span>
+        <span style={{ color: plusColor }}> Plus+</span>
+      </Link>
     </LogoContainer>
   )
 }

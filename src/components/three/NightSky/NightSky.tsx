@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { createThreeScene } from './threeSetup'
-import { createTitleElement, createButtonElement } from './createUIElements'
+import { createButtonElement } from './createUIElements'
 import { createTorus, createParticles } from './createObjects'
 import { handleWindowResize } from './eventHandlers'
 
@@ -22,7 +22,6 @@ const NightSky: React.FC<NightSkyProps> = () => {
     }
 
     const { scene, camera, renderer } = createThreeScene(sizes)
-    const [titleElement, plusSpan] = createTitleElement()
     const buttonElement = createButtonElement()
 
     buttonElementRef.current = buttonElement
@@ -93,20 +92,9 @@ const NightSky: React.FC<NightSkyProps> = () => {
 
     animate()
 
-    setTimeout(() => {
-      titleElement.style.opacity = '1'
-      titleElement.style.transition = 'opacity 2.4s ease'
-    }, 300)
-
-    setTimeout(() => {
-      plusSpan.style.opacity = '1'
-      plusSpan.style.transition = 'opacity 0.5s ease'
-    }, 3000)
-
     return () => {
       // Clean up
       document.body.removeChild(renderer.domElement)
-      document.body.removeChild(titleElement)
       document.body.removeChild(buttonElementRef.current!)
       document.removeEventListener('mousemove', handleMouseMove)
     }
