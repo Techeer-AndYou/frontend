@@ -45,7 +45,9 @@ const Header = ({ rememberColor = 'black', plusColor = 'skyblue' }) => {
             마이페이지
           </Link>
         </MenuItem>
-        <MenuItem style={{ color: rememberColor }}>로그아웃</MenuItem>
+        <Link href='/'>
+          <MenuItem style={{ color: rememberColor }}>로그아웃</MenuItem>
+        </Link>
       </Menu>
     </HeaderContainer>
   )
