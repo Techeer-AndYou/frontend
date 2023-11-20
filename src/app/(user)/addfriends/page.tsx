@@ -1,15 +1,90 @@
 'use client'
 
+import CardRecommended from '@/components/card/CardRecommended'
+import NeumorphismButton from '@/components/common/NeumorphismButton'
 import Header from '@/components/global/Header'
-import RecommendedFriends from '@/components/user/RecommendedFriends'
 import styled from '@emotion/styled'
 import { useState } from 'react'
 
+type CardState = {
+  id: string
+  friendName: string
+  leftPos: number
+  topPos: number
+  backgroundImgUrl: string
+  isVisible: boolean
+}
+
+const AddFriendsPageTest = () => {
+  const [reloadKey, setReloadKey] = useState(0) // 리로드를 위한 키값
+
+  const [cards, setCards] = useState<CardState[]>([
+    {
+      id: '1',
+      friendName: '지구 일타강사',
+      leftPos: 500,
+      topPos: 200,
+      backgroundImgUrl: '/images/earth_star_card.png',
+      isVisible: true,
+    },
+    {
+      id: '2',
+      friendName: '이타치강사',
+      leftPos: 700,
+      topPos: 100,
+      backgroundImgUrl: '/images/Itachi_mock.png',
+      isVisible: true,
+    },
+  ])
+
+  const handleLoadRecommendedFriends = () => {
+    setCards((prevCards) => prevCards.map((card) => ({ ...card, isVisible: true })))
+
+    setReloadKey((prevKey) => prevKey + 1)
+  }
+
+  const handleRemoveCard = (cardId: string) => {
+    setCards((prevCards) =>
+      prevCards.map((card) => (card.id === cardId ? { ...card, isVisible: false } : card)),
+    )
+  }
+
+  return (
+    <>
+      <Header rememberColor='white' plusColor='skyblue' />
+      <Container>
+        <LeftArea data-left-area />
+        <CenterArea>
+          {cards.map(
+            (card) =>
+              card.isVisible && (
+                <CardRecommended
+                  key={`${card.id}-${reloadKey}`}
+                  friendName={card.friendName}
+                  leftPos={card.leftPos}
+                  topPos={card.topPos}
+                  backgroundImgUrl={card.backgroundImgUrl}
+                  onRemove={() => handleRemoveCard(card.id)}
+                />
+              ),
+          )}
+        </CenterArea>
+        <ButtonArea>
+          <NeumorphismButton text='추천친구 불러오기' onClick={handleLoadRecommendedFriends} />
+        </ButtonArea>
+        <RightArea data-right-area />
+      </Container>
+    </>
+  )
+}
+
+export default AddFriendsPageTest
+
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(14, 1fr);
+  width: 100vw;
   height: 100vh;
   background-image: url('/images/add_friends_background.png');
   background-size: cover;
@@ -26,73 +101,30 @@ const Container = styled.div`
   }
 `
 
-const Content = styled.div`
-  display: flex;
-  align-items: flex-end;
-  width: 100vw;
-  height: 100vh;
+const LeftArea = styled.div`
+  grid-column: 1 / 3;
+  grid-row: 1 / 15;
+  background: linear-gradient(to left, transparent, black);
 `
 
-const ReccommendArea = styled.div`
-  z-index: 1;
-  flex: 2;
+const RightArea = styled.div`
+  grid-column: 11 / 13;
+  grid-row: 1 / 15;
+  background: linear-gradient(to right, transparent, black);
 `
 
-const LeftRightArea = styled.div`
-  flex: 0.15; // 왼쪽과 오른쪽 영역을 각각 15%로 설정합니다.
-  border: solid white; // 테두리를 추가합니다.
-  height: 90%;
+const CenterArea = styled.div`
+  grid-column: 4 / 10;
+  grid-row: 2 / 12;
+  justify-self: center;
+  align-self: center;
+  color: white;
 `
 
-const MainArea = styled.div`
-  flex: 0.7; // 중앙 영역을 70%로 설정합니다. (100% - (15% * 2) = 70%)
-  height: 90%;
+const ButtonArea = styled.div`
+  grid-column: 4 / 10;
+  grid-row: 12 / 13;
+  justify-self: center;
+  align-self: center;
+  color: white;
 `
-
-export type RecommendedFriend = {
-  id: number
-  position: {
-    top: number
-    left: number
-  }
-  isVisible: boolean
-}
-
-const AddFriendsPage = () => {
-  // 추천 친구들의 초기 상태
-  const [friends, setFriends] = useState<RecommendedFriend[]>([
-    { id: 1, position: { top: 20, left: 25 }, isVisible: true },
-  ])
-
-  // 친구의 상태를 업데이트하는 함수
-  const updateFriendState = (friendId: number, data: Partial<RecommendedFriend>) => {
-    setFriends((prevFriends) =>
-      prevFriends.map((friend) => (friend.id === friendId ? { ...friend, ...data } : friend)),
-    )
-  }
-
-  return (
-    <>
-      <Header rememberColor='white' plusColor='skyblue' />
-      <Container>
-        <Content>
-          <LeftRightArea></LeftRightArea>
-          <MainArea>
-            <ReccommendArea>
-              {friends.map((friend) => (
-                <RecommendedFriends
-                  key={friend.id}
-                  initialData={friend} // 초기 상태를 props로 전달
-                  onUpdate={updateFriendState} // 상태 업데이트 함수를 props로 전달
-                />
-              ))}
-            </ReccommendArea>
-          </MainArea>
-          <LeftRightArea></LeftRightArea>
-        </Content>
-      </Container>
-    </>
-  )
-}
-
-export default AddFriendsPage
