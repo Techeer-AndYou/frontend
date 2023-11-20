@@ -28,14 +28,14 @@ const Container = styled.div`
 `
 
 const LeftArea = styled.div`
-  grid-column: 1 / 4;
-  grid-row: 2 / 15;
+  grid-column: 1 / 3;
+  grid-row: 1 / 15;
   background: linear-gradient(to left, transparent, black);
 `
 
 const RightArea = styled.div`
-  grid-column: 10 / 13;
-  grid-row: 2 / 15;
+  grid-column: 11 / 13;
+  grid-row: 1 / 15;
   background: linear-gradient(to right, transparent, black);
 `
 
@@ -55,32 +55,73 @@ const ButtonArea = styled.div`
   color: white;
 `
 
+type CardState = {
+  id: string
+  friendName: string
+  leftPos: number
+  topPos: number
+  backgroundImgUrl: string
+  isVisible: boolean
+}
+
 const AddFriendsPageTest = () => {
-  const [showComponent, setShowComponent] = useState(false)
   const [reloadKey, setReloadKey] = useState(0) // 리로드를 위한 키값
 
+  const [cards, setCards] = useState<CardState[]>([
+    {
+      id: '1',
+      friendName: '지구 일타강사',
+      leftPos: 500,
+      topPos: 200,
+      backgroundImgUrl: '/images/earth_star_card.png',
+      isVisible: true,
+    },
+    {
+      id: '2',
+      friendName: '이타치강사',
+      leftPos: 700,
+      topPos: 100,
+      backgroundImgUrl: '/images/Itachi_mock.png',
+      isVisible: true,
+    },
+  ])
+
   const handleLoadRecommendedFriends = () => {
-    if (showComponent && reloadKey === 0) {
-      setReloadKey((prevKey) => prevKey + 1)
-    } else {
-      setShowComponent(true)
-      setReloadKey(0)
-    }
-    console.log(reloadKey)
+    setCards((prevCards) => prevCards.map((card) => ({ ...card, isVisible: true })))
+
+    setReloadKey((prevKey) => prevKey + 1)
+  }
+
+  const handleRemoveCard = (cardId: string) => {
+    setCards((prevCards) =>
+      prevCards.map((card) => (card.id === cardId ? { ...card, isVisible: false } : card)),
+    )
   }
 
   return (
     <>
       <Header rememberColor='white' plusColor='skyblue' />
       <Container>
-        <LeftArea />
+        <LeftArea data-left-area />
         <CenterArea>
-          {showComponent && <CardRecommended key={reloadKey} friendName='지구력 2타치강사' />}{' '}
+          {cards.map(
+            (card) =>
+              card.isVisible && (
+                <CardRecommended
+                  key={`${card.id}-${reloadKey}`}
+                  friendName={card.friendName}
+                  leftPos={card.leftPos}
+                  topPos={card.topPos}
+                  backgroundImgUrl={card.backgroundImgUrl}
+                  onRemove={() => handleRemoveCard(card.id)}
+                />
+              ),
+          )}
         </CenterArea>
         <ButtonArea>
           <NeumorphismButton text='추천친구 불러오기' onClick={handleLoadRecommendedFriends} />
         </ButtonArea>
-        <RightArea />
+        <RightArea data-right-area />
       </Container>
     </>
   )
