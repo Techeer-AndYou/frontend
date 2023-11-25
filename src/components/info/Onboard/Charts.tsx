@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import ThreeDPieChart from './ThreeDPieChart'
 import IntroLineChart from './IntroLineChart'
+import { blue } from '@mui/material/colors'
 
 const Container = styled.div`
   background-color: white;

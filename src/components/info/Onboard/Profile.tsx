@@ -22,13 +22,14 @@ const Container = styled.div`
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  background-color: black;
+  background-color: rgb(2 35 84);
   font-weight: bolder;
   color: white;
 `
 
 const TextContainer = styled.div`
   text-align: center;
+  margin-top: 60%;
 
   & > h1:not(:last-child) {
     margin-bottom: 3rem;
@@ -39,20 +40,17 @@ const Services = styled.h1`
   text-align: center;
   font-family: serif;
   font-weight: bold;
+  font-size: 200%;
 `
 
 const AnimatedWord = styled.h1`
-  position: relative;
-  display: inline-grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  gap: 3rem;
-  overflow: hidden;
-  font-size: larger;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
   background: linear-gradient(97deg, #ff00e5 21.55%, #e94646 74.82%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
   animation: ${word} 7s infinite;
   &:nth-of-type(2) {
     animation-delay: -1.4s;
@@ -75,6 +73,7 @@ const AnimatedWord = styled.h1`
 const ServiceDescription = styled.h3`
   color: white;
   font-weight: normal;
+  font-size: 120%;
 `
 
 const Profile = () => {
@@ -83,12 +82,12 @@ const Profile = () => {
       <TextContainer className='text-center space-y-12'>
         <Services className='text-center font-serif font-bold'>
           Services offered
-          <div>
-            <AnimatedWord className='animate-word'>Mac</AnimatedWord>
-            <AnimatedWord className='animate-word-delay-1'>Window</AnimatedWord>
-            <AnimatedWord className='animate-word-delay-2'>IOS</AnimatedWord>
-            <AnimatedWord className='animate-word-delay-3'>Android</AnimatedWord>
-            <AnimatedWord className='animate-word-delay-4'>Firefox</AnimatedWord>
+          <div className='relative inline-grid grid-cols-1 grid-rows-1 gap-12 overflow-hidden'>
+            <AnimatedWord>Mac</AnimatedWord>
+            <AnimatedWord>Window</AnimatedWord>
+            <AnimatedWord>IOS</AnimatedWord>
+            <AnimatedWord>Android</AnimatedWord>
+            <AnimatedWord>Firefox</AnimatedWord>
           </div>
         </Services>
         <ServiceDescription>우리의 서비스를 어디에서나 즐길 수 있습니다</ServiceDescription>

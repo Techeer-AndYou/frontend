@@ -24,7 +24,7 @@ const TopContainer = styled.div<ContainerProps>`
 const FindFriendsContainer = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
-  
+
   & > p {
     display: flex;
     justify-content: center;
@@ -34,7 +34,7 @@ const FindFriendsContainer = styled.div<ContainerProps>`
 
   opacity: ${(props) => (props.isLoaded ? 1 : 0)};
   transition: opacity 1.2s; // 1.2초 동안 fade in 효과
-}`
+`
 
 const NextButton = styled.button`
   display: flex;

@@ -35,11 +35,15 @@ const ThreeDPieChart: React.FC<PieChartPropsType> = ({ data }) => {
         alpha: 45,
         beta: 0,
       },
-      width: 800,
-      height: 600,
+      backgroundColor: 'rgb(2 35 84)',
+      width: 700,
+      height: 500,
     },
     title: {
       text: '직업 비율',
+      style: {
+        color: 'white',
+      },
       align: 'center',
     },
     accessibility: {
@@ -80,6 +84,6 @@ const ThreeDPieChart: React.FC<PieChartPropsType> = ({ data }) => {
     }
   }, [])
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+  return <HighchartsReact style highcharts={Highcharts} options={chartOptions} />
 }
 export default ThreeDPieChart

@@ -12,10 +12,13 @@ type IntroChartPropsType = {
 
 const IntroLineChart: React.FC<IntroChartPropsType> = ({ chartData }) => {
   const options: Highcharts.Options = {
-    colors: ['#01579B'],
+    colors: ['#fcfcfc'],
     title: {
       text: '사이트 이용자 수',
       align: 'center',
+      style: {
+        color: 'white',
+      },
     },
     // subtitle: {
     //   text: 'By Job Category. Source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>.',
@@ -24,11 +27,19 @@ const IntroLineChart: React.FC<IntroChartPropsType> = ({ chartData }) => {
     yAxis: {
       title: {
         text: '사이트 유저 추이',
+        style: {
+          color: 'white',
+        },
       },
     },
     xAxis: {
       accessibility: {
         rangeDescription: 'Range: 2010 to 2020',
+      },
+      labels: {
+        style: {
+          color: 'white', // 흰색으로 설정
+        },
       },
     },
     legend: {
@@ -75,8 +86,9 @@ const IntroLineChart: React.FC<IntroChartPropsType> = ({ chartData }) => {
     },
     chart: {
       type: 'line', // Specify the chart type (you can change this to other types if needed)
-      width: 800, // Set the width of the chart
+      width: 700, // Set the width of the chart
       height: 500, // Set the height of the chart
+      backgroundColor: 'rgb(2 35 84)',
     },
   }
   return <HighchartsReact highcharts={Highcharts} options={options} />
