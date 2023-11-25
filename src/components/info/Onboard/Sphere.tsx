@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import styled from '@emotion/styled'
 
 const Sphere = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -17,7 +19,7 @@ const Sphere = () => {
     const init = () => {
       // Set up the scene
       scene = new THREE.Scene()
-      scene.background = new THREE.Color(0xffffff) // White background
+      scene.background = new THREE.Color(0xfffff) // White background
 
       // Set up the camera
       camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100)
@@ -68,8 +70,8 @@ const Sphere = () => {
 
               // Change background color gradually
               const backgroundColor = new THREE.Color().lerpColors(
-                new THREE.Color(0x000000),
-                new THREE.Color(0xffffff),
+                new THREE.Color(0x002451),
+                new THREE.Color(0x002451),
                 model.scale.x / 3.5,
               )
               scene.background = backgroundColor
@@ -100,13 +102,13 @@ const Sphere = () => {
       const initialScale = model.scale.clone()
       const animationDuration = 1700
       const frameRate = 70
-      const totalFrames = animationDuration / (1000 / frameRate)
+      const totalFrames = animationDuration / (3000 / frameRate)
       let currentFrame = 0
 
       const animateScale = () => {
         if (currentFrame >= totalFrames) {
           setIsLarge(!isLarge)
-          setShowText(true) // Show the text after scaling animation is complete
+          setShowText(!isLarge) // 애니메이션이 완료된 후 텍스트를 표시하지 않음
           return
         }
 
@@ -121,10 +123,12 @@ const Sphere = () => {
       }
 
       animateScale()
+      setShowText(true) // 애니메이션 시작 시 텍스트 표시
     }
   }
 
   const handleScreenClick = () => {
+    setShowText(false) // 화면 클릭 시 텍스트 숨김 휴 찾았다 이녀석
     if (!isLarge) {
       setShowText(false) // Hide the text when screen is clicked
     } else {
@@ -143,6 +147,7 @@ const Sphere = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        background: 'lightgray',
       }}
     >
       <div
@@ -158,7 +163,7 @@ const Sphere = () => {
       {showText && (
         <Text
           style={{
-            transform: 'translate(-50%, 0)',
+            transform: 'translate(0%, 0)',
             // 수정요망
           }}
           isVisible={true}
@@ -175,7 +180,7 @@ interface TextProps {
   style?: React.CSSProperties
 }
 
-const Text = ({ isVisible, onClick }: TextProps) => {
+const Text = ({ isVisible, onClick, style }: TextProps) => {
   const [isAnimating, setIsAnimating] = useState(false)
   const [isShowing, setIsShowing] = useState(isVisible)
 
@@ -194,10 +199,52 @@ const Text = ({ isVisible, onClick }: TextProps) => {
     setIsShowing(isVisible)
   }, [isVisible])
 
+  const RememberText = styled.div`
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-weight: bolder;
+    font-size: 2rem;
+
+    & span {
+      color: skyblue;
+    }
+  `
+
   return (
-    <h1 className={`Text1 ${isShowing ? 'fadeIn' : 'fadeOut'}`} onClick={handleClick}>
-      나와 명함을 주고받은 사람들을 <span className='text2'>한눈에</span> 볼 수 있습니다!
-    </h1>
+    <Link href='/main'>
+      <RememberText>
+        Remember <span>plus+</span>
+      </RememberText>
+      <h1
+        className={`Text1 ${isShowing ? 'fadeIn' : 'fadeOut'}`}
+        onClick={handleClick}
+        style={{
+          color: 'white',
+          display: isShowing ? 'block' : 'none',
+          fontSize: '2rem',
+          fontWeight: 'bold',
+          ...style,
+        }}
+      >
+        나와 명함을 주고받은 사람들을{' '}
+        <span
+          style={{
+            backgroundImage: 'linear-gradient(97deg, #4d57e1 21.55%, #46d1e9 74.82%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            fontWeight: 'bold',
+          }}
+          className='text2'
+        >
+          한눈에
+        </span>{' '}
+        볼 수 있습니다!
+      </h1>
+    </Link>
   )
 }
 

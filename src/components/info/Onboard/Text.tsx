@@ -12,6 +12,10 @@ const handleScrollToTop = () => {
 }
 
 const Title = styled.h1`
+  background: white;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-size: 5.8rem;
   margin-top: 0.5%;
   margin-left: 1rem;
@@ -91,9 +95,9 @@ const Text = () => {
           <EnterLink>Enter</EnterLink>
         </Link>
       </ClickText>
-      <RememberText>
+      {/* <RememberText>
         Remember <span>plus+</span>
-      </RememberText>
+      </RememberText> */}
 
       <ScrollTopButton onClick={handleScrollToTop}>🔝</ScrollTopButton>
     </div>
